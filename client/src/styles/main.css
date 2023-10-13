@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "ClashGrotesk-Regular";
+  src: url("/fonts/ClashGrotesk-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ClashGrotesk-Light";
+  src: url("/fonts/ClashGrotesk-Light.woff") format("woff");
+  font-weight: light;
+  font-style: normal;
+  font-display: swap;
+}

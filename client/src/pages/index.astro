@@ -1,17 +1,18 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Divider from "../components/Divider.astro";
+import Card from "../components/Card.astro";
 ---
 
 <MainLayout title="Kyle Kettler">
-  <div class="w-full bg-slate-100 rounded-3xl p-6">
-    <div class="flex gap-4 mb-80">
-      <h1 class="text-6xl font-light">Hi, I'm Kyle.</h1>
+  <div class="pt-12">
+    <div class="flex gap-4 mb-4">
+      <h1 class="text-6xl font-clashLight text-slate-200">Hi, I'm Kyle.</h1>
     </div>
-    <h2 class="text-4xl font-light">
-      I've spent the last decade designing and building online projects for
+    <p class="text-lg font-clashLight text-slate-200 tracking-wide">
+      I'm a <span class="text-blue-300">frontend engineer</span> and <span
+        class="text-blue-300">designer</span
+      >. I've spent the last decade designing and building online projects for
       clients, in-house, and for fun.
-    </h2>
+    </p>
   </div>
-  <Divider title="Primary Projects" />
 </MainLayout>
