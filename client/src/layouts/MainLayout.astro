@@ -1,5 +1,5 @@
 ---
-import '../styles/main.css'
+import "../styles/main.css";
 
 interface Props {
   title: string;
@@ -18,14 +18,11 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
-    <main class="max-w-164 mx-auto flex flex-col gap-2">
+  <body
+    class="bg-neutral-950 antialiased selection:bg-rose-500 selection:text-slate-900"
+  >
+    <main class="max-w-164 mx-auto flex flex-col gap-8">
       <slot />
     </main>
   </body>
 </html>
-<style is:global>
-  html {
-    background-color: #13151a;
-  }
-</style>

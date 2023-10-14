@@ -7,7 +7,7 @@
   src: url("/fonts/ClashGrotesk-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 @font-face {
@@ -15,5 +15,13 @@
   src: url("/fonts/ClashGrotesk-Light.woff") format("woff");
   font-weight: light;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Switzer-Bold";
+  src: url("/fonts/Switzer-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: block;
 }

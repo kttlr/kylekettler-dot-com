@@ -6,6 +6,7 @@ export default {
 			fontFamily: {
 				clash: ['ClashGrotesk-Regular', 'sans-serif'],
 				clashLight: ['ClashGrotesk-Light', 'sans-serif'],
+				switzerBold: ['Switzer-Bold', 'sans-serif'],
 			},
 			maxWidth: {
         152: '38rem',

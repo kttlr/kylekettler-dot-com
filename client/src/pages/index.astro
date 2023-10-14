@@ -1,18 +1,38 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Card from "../components/Card.astro";
+import SpotlightCard from "../components/SpotlightCard.tsx";
+
+const technologies = [
+  "TypeScript",
+  "JavaScript (ES6+)",
+  "React",
+  "Astro",
+  "NextJS",
+  "PostgreSQL",
+  "TailwindCSS",
+  "NodeJS",
+  "Express",
+];
 ---
 
 <MainLayout title="Kyle Kettler">
   <div class="pt-12">
-    <div class="flex gap-4 mb-4">
-      <h1 class="text-6xl font-clashLight text-slate-200">Hi, I'm Kyle.</h1>
+    <div class="flex gap-6 mb-4">
+      <h1 class="text-2xl font-switzerBold text-slate-200 tracking-tight">
+        Hi, I'm Kyle.
+      </h1>
     </div>
-    <p class="text-lg font-clashLight text-slate-200 tracking-wide">
-      I'm a <span class="text-blue-300">frontend engineer</span> and <span
-        class="text-blue-300">designer</span
+    <p class="text-lg font-clash text-slate-200 tracking-wide">
+      I'm a <span class="text-rose-400">frontend engineer</span> and <span
+        class="text-rose-400">designer</span
       >. I've spent the last decade designing and building online projects for
       clients, in-house, and for fun.
     </p>
   </div>
+  <SpotlightCard client:idle>
+    <h2 class="text-xl font-clash text-slate-200 mb-4">Primary Technologies</h2>
+    <div class="flex flex-wrap gap-4 text-slate-200 font-clashLight">
+      {technologies.map((tech) => <div>{tech}</div>)}
+    </div>
+  </SpotlightCard>
 </MainLayout>
