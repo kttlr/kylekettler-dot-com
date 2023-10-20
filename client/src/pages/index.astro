@@ -1,38 +1,74 @@
 ---
+import { Image } from "astro:assets";
 import MainLayout from "../layouts/MainLayout.astro";
 import SpotlightCard from "../components/SpotlightCard.tsx";
+import Navbar from "../components/Navbar.astro";
+import RockOn from "../images/sign_of_the_horns_3d_default.png";
+import Headshot from "../images/headshot.png";
+import Button from "../components/Button.astro";
 
 const technologies = [
   "TypeScript",
   "JavaScript (ES6+)",
   "React",
-  "Astro",
-  "NextJS",
-  "PostgreSQL",
-  "TailwindCSS",
   "NodeJS",
   "Express",
+  "Astro",
+  "NextJS",
+  "Remix",
+  "PostgreSQL",
+  "TailwindCSS",
 ];
 ---
 
 <MainLayout title="Kyle Kettler">
-  <div class="pt-12">
-    <div class="flex gap-6 mb-4">
-      <h1 class="text-2xl font-switzerBold text-slate-200 tracking-tight">
-        Hi, I'm Kyle.
-      </h1>
+  <Navbar client:idle />
+  <div class="pt-24">
+    <div class="flex gap-4 items-center">
+      <Image
+        src={Headshot}
+        alt="headshot"
+        width={80}
+        height={80}
+        class="rounded-full"
+        densities={[1.5, 2]}
+      />
+      <div class="flex-col gap-6 text-stone-100/80">
+        <div class="flex gap-2 items-start">
+          <h1 class="text-3xl font-semibold tracking-tight">Hi, I'm Kyle.</h1>
+          <Image
+            src={RockOn}
+            alt="rock on emoji"
+            width="32"
+            height="32"
+            densities={[1.5, 2]}
+          />
+        </div>
+        <h2 class="text-lg font-clash tracking-tight">Frontend Engineer</h2>
+      </div>
+      <div class="flex flex-col gap-2">
+        <Button theme="primary" type="button" size="md">Github</Button>
+        <Button theme="primary" type="button" size="md">LinkedIn</Button>
+      </div>
     </div>
-    <p class="text-lg font-clash text-slate-200 tracking-wide">
-      I'm a <span class="text-rose-400">frontend engineer</span> and <span
-        class="text-rose-400">designer</span
-      >. I've spent the last decade designing and building online projects for
-      clients, in-house, and for fun.
-    </p>
   </div>
   <SpotlightCard client:idle>
-    <h2 class="text-xl font-clash text-slate-200 mb-4">Primary Technologies</h2>
-    <div class="flex flex-wrap gap-4 text-slate-200 font-clashLight">
+    <h2 class="text-xl font-clash mb-4 text-stone-100/80">
+      Primary Technologies
+    </h2>
+    <div class="flex flex-wrap gap-4 font-clashLight text-stone-100/80">
       {technologies.map((tech) => <div>{tech}</div>)}
     </div>
   </SpotlightCard>
+  <div class="font-clash text-stone-100/70">
+    <h2 class="text-xl font-semibold mb-2">About Me</h2>
+    <p class="mb-2">
+      I am a frontend engineer with an extensive background in design. I spent a
+      decade in various design roles, beginning with print and graphic design,
+      then moving web and product design, and then learing web development
+      through building with Webflow. In 2023, I transisitoned to frontend
+      engineering full-time with a focus in TypeScript, React, NodeJS, and
+      relational databases.
+    </p>
+  </div>
 </MainLayout>

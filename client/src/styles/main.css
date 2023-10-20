@@ -25,3 +25,11 @@
   font-style: normal;
   font-display: block;
 }
+
+@font-face {
+  font-family: "Switzer-Semibold";
+  src: url("/fonts/Switzer-Semibold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: block;
+}
