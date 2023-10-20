@@ -22,15 +22,15 @@ export default function SpotlightCard({ children }: Props) {
 
   return (
     <div
-      className="group relative rounded-xl border border-white/10 bg-neutral-900 p-6"
+      className="group relative rounded-xl border border-slate-400/20 bg-cyan-200/10 p-6 shadow-lg"
       onMouseMove={handeMouseMove}>
       <motion.div
             className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
             style={{
               background: useMotionTemplate`
                 radial-gradient(
-                  650px circle at ${mouseX}px ${mouseY}px,
-                  rgba(14, 120, 233, 0.15),
+                  500px circle at ${mouseX}px ${mouseY}px,
+                  rgba(6, 182, 212, 0.1),
                   transparent 80%
                 )
               `,

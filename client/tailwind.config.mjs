@@ -7,6 +7,7 @@ export default {
 				clash: ['ClashGrotesk-Regular', 'sans-serif'],
 				clashLight: ['ClashGrotesk-Light', 'sans-serif'],
 				switzerBold: ['Switzer-Bold', 'sans-serif'],
+				switzerSemi: ['Switzer-Semibold', 'sans-serif'],
 			},
 			maxWidth: {
         152: '38rem',
