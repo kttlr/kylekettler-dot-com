@@ -1,0 +1,32 @@
+---
+import Navbar from "../components/Navbar.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title,
+  description = "Kyle Kettler - Frontend Software Engineer",
+  image = "/images/og-main.jpg",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:image" content={image} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen">
+    <Navbar />
+    <slot />
+  </body>
+</html>
