@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/Layout.astro";
+import H1 from "../../components/H1.astro";
+import Main from "../../components/Main.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  const paths = projects.map((project) => {
+    return {
+      params: {
+        slug: project.slug,
+      },
+      props: { project },
+    };
+  });
+  return paths;
+}
+
+type Props = {
+  project: CollectionEntry<"projects">;
+};
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Layout title={project.data.title}>
+  <Main>
+    <H1>{project.data.title}</H1>
+    <Image
+      src={project.data.image}
+      alt={project.data.title}
+      width={600}
+      height={400}
+    />
+    <div class="prose">
+      <Content />
+    </div>
+  </Main>
+</Layout>
