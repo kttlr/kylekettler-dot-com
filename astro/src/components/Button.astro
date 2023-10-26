@@ -1,0 +1,16 @@
+---
+type Props = {
+  text: string;
+  to: string;
+};
+
+const { text, to } = Astro.props;
+---
+
+<a href={to} target="_blank">
+  <button
+    class="bg-zinc-950 border border-zinc-400 px-4 py-0.5 rounded-full text-xs text-zinc-300 hover:bg-zinc-800 transition-colors duration-200"
+  >
+    {text}
+  </button>
+</a>

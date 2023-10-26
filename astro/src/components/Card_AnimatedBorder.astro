@@ -1,0 +1,28 @@
+---
+
+---
+
+<div class="box relative rounded-xl p-8 flex flex-col justify-center">
+  <slot />
+</div>
+<style>
+  .box {
+    border: 1px solid #0000;
+    background:
+      linear-gradient(#18181b, #18181b) padding-box,
+      linear-gradient(var(--angle), #18181b, #e8e9f671) border-box;
+    animation: 10s rotate linear infinite;
+  }
+
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+</style>

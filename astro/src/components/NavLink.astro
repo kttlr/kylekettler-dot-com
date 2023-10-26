@@ -1,0 +1,14 @@
+---
+type Props = {
+  text: string;
+  to: string;
+};
+
+const { text, to } = Astro.props;
+---
+
+<a
+  href={to}
+  class="text-zinc-400 transition-colors duration-300 hover:text-zinc-50"
+  >{text}</a
+>

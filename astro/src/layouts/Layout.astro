@@ -27,8 +27,14 @@ const {
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class="min-h-screen">
-    <Navbar />
-    <slot />
+  <body
+    class="bg-black text-zinc-100 selection:bg-zinc-300 selection:text-zinc-900"
+  >
+    <div
+      class="min-h-screen bg-gradient-to-tl from-zinc-950 via-zinc-500/10 to-zinc-900"
+    >
+      <Navbar />
+      <slot />
+    </div>
   </body>
 </html>

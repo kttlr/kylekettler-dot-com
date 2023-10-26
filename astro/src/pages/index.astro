@@ -1,13 +1,71 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Main from "../components/Main.astro";
 import H1 from "../components/H1.astro";
+import Card from "../components/Card_AnimatedBorder.astro";
+import Headshot from "../images/headshot.png";
+import Button from "../components/Button.astro";
+
+const technologies = [
+  "TypeScript",
+  "JavaScript (ES6+)",
+  "CSS",
+  "React",
+  "TailwindCSS",
+  "Astro",
+  "Remix",
+  "NextJS",
+  "NodeJS",
+  "Express",
+  "PostgreSQL",
+];
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Kyle Kettler | Frontend Engineer">
   <Main>
-    <div>
-      <H1>Hello</H1>
+    <div class="flex flex-col gap-8">
+      <div class="flex gap-4 items-center">
+        <Image
+          src={Headshot}
+          alt="headshot"
+          width={120}
+          height={120}
+          class="rounded-full"
+          densities={[1.5, 2]}
+        />
+        <div class="flex flex-col gap-2 pr-16">
+          <H1>
+            Hi, I'm Kyle. <span class="font-normal"
+              >I'm a frontend engineer and designer.</span
+            >
+          </H1>
+          <div class="flex gap-2">
+            <Button to="https://github.com/kyle-kettler" text="Github" />
+            <Button
+              to="https://www.linkedin.com/in/kylekettler/"
+              text="LinkedIn"
+            />
+          </div>
+        </div>
+      </div>
+      <Card>
+        <h2 class="font-light text-xl mb-4">Primary Technologies</h2>
+        <div class="flex flex-wrap gap-4 font-light text-sm text-zinc-300">
+          {technologies.map((tech) => <div>{tech}</div>)}
+        </div>
+      </Card>
+      <div>
+        <h2 class="font-light text-xl mb-2">About Me</h2>
+        <p class="font-light leading-7 text-zinc-300">
+          I am a frontend engineer with an extensive background in design. I
+          spent a decade in various design roles, beginning with print and
+          graphic design, then moving web and product design, and then learing
+          web development by building with Webflow. In 2023, I transisitoned to
+          frontend engineering full-time with a focus in TypeScript, React,
+          NodeJS, and relational databases.
+        </p>
+      </div>
     </div>
   </Main>
 </Layout>
