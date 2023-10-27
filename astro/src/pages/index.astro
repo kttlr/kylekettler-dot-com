@@ -5,11 +5,13 @@ import Layout from "../layouts/Layout.astro";
 import Main from "../components/Main.astro";
 import H1 from "../components/Typography/H1.astro";
 import H2 from "../components/Typography/H2.astro";
+import InlineLink from "../components/Typography/InlineLink.astro";
 import Card from "../components/Card_AnimatedBorder.astro";
 import Headshot from "../images/headshot.png";
 import Button from "../components/Button.astro";
 import CardLink from "../components/React/Card_Link";
 import Badge from "../components/Badge.astro";
+import Footer from "../components/Footer.astro";
 
 const technologies = [
   "TypeScript",
@@ -28,11 +30,13 @@ const technologies = [
 const projects = await getCollection("projects", ({ data }) => {
   return data.featured;
 });
+
+const posts = await getCollection("posts");
 ---
 
 <Layout title="Kyle Kettler | Frontend Engineer">
   <Main>
-    <div class="flex flex-col gap-8">
+    <div class="flex flex-col gap-16 animate-fade-in">
       <div class="flex gap-4 items-center">
         <Image
           src={Headshot}
@@ -85,7 +89,7 @@ const projects = await getCollection("projects", ({ data }) => {
                 <div class="flex justify-between items-center mb-4">
                   <h2 class="font-semibold text-2xl">{p.data.title}</h2>
                   <time
-                    class="text-zinc-500 text-xs font-light pb-2"
+                    class="text-zinc-400 text-xs font-light pb-2 "
                     datetime={p.data.date.toLocaleDateString(undefined, {
                       month: "numeric",
                       year: "numeric",
@@ -110,21 +114,57 @@ const projects = await getCollection("projects", ({ data }) => {
         }
       </div>
       <div>
-        <H2>Posts</H2>
+        <div class="mb-2">
+          <H2>Posts</H2>
+        </div>
+        {
+          posts.map((post) => (
+            <a
+              href="#"
+              class="flex justify-between items-center hover:underline"
+            >
+              <h3>{post.data.title}</h3>
+              <time
+                class="text-zinc-400 text-xs font-light pb-2 "
+                datetime={post.data.date.toLocaleDateString(undefined, {
+                  month: "numeric",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              >
+                {post.data.date.toLocaleDateString(undefined, {
+                  month: "numeric",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </time>
+            </a>
+          ))
+        }
       </div>
-      <div class="flex flex-col gap-4">
+      <div class="flex flex-col gap-4 text-zinc-200">
         <h3 class="font-bold">About this Site</h3>
-        <p class="text-sm">
-          This site is built in Astro with TypeScript and it uses some React
-          components. It uses MDX and Astro Content Collections as a lightweight
-          CMS. It is hosted on Vercel.
+        <p class="text-sm leading-6">
+          This site is built in <InlineLink to="https://astro.build/" blank>
+            Astro
+          </InlineLink> and uses TypeScript, React, Tailwind, Framer Motion,
+          MDX, and Astro Content Collections as a file-based CMS. It is hosted
+          on Vercel.
         </p>
         <p class="text-sm">
-          You can read about why I chose Astro here and you can view the source
-          code on my Github.
+          You can read about why I chose Astro here or check out the source
+          code.
         </p>
-        <p class="text-sm">The typeface is Brockmann by Atipo Foundry.</p>
+        <p class="text-sm">
+          The typeface is Brockmann by <InlineLink
+            to="https://www.atipofoundry.com/"
+            blank
+          >
+            Atipo Foundry
+          </InlineLink>.
+        </p>
       </div>
+      <Footer />
     </div>
   </Main>
 </Layout>

@@ -1,0 +1,16 @@
+---
+type Props = {
+  to: string;
+  blank?: boolean;
+};
+
+const { to, blank } = Astro.props;
+---
+
+<a
+  href={to}
+  class="font-bold inline-block underline underline-offset-[2.5px] hover:text-zinc-400 hover:underline-offset-4 transition-all duration-200"
+  target={blank ? "_blank" : ""}
+>
+  <slot />
+</a>

@@ -1,0 +1,17 @@
+---
+import InlineLink from "./Typography/InlineLink.astro";
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="w-full flex items-center justify-between text-xs text-zinc-500 mt-12"
+>
+  <div>© {year}</div>
+  <div class="flex items-center gap-2">
+    <InlineLink to="https://github.com/kyle-kettler" blank>Github</InlineLink>
+    <InlineLink to="https://www.linkedin.com/in/kylekettler/" blank>
+      LinkedIn
+    </InlineLink>
+    <InlineLink to="https://posts.cv/kylekettler" blank>Posts.cv</InlineLink>
+  </div>
+</footer>
