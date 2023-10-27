@@ -1,0 +1,13 @@
+---
+type Props = {
+  text: string;
+};
+
+const { text } = Astro.props;
+---
+
+<span
+  class="inline-flex h-full items-center justify-center rounded-full border border-zinc-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,75%,#000)] bg-[length:250%_100%] px-3 py-0.5 font-light text-xs text-zinc-300"
+>
+  {text}
+</span>

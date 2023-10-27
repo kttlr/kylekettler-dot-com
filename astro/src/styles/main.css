@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "brockmann-regular";
+  src: url("/fonts/brockmann-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "brockmann-medium";
+  src: url("/fonts/brockmann-medium.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "brockmann-semibold";
+  src: url("/fonts/brockmann-semibold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "brockmann-bold";
+  src: url("/fonts/brockmann-bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

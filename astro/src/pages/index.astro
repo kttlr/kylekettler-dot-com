@@ -1,11 +1,15 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Main from "../components/Main.astro";
-import H1 from "../components/H1.astro";
+import H1 from "../components/Typography/H1.astro";
+import H2 from "../components/Typography/H2.astro";
 import Card from "../components/Card_AnimatedBorder.astro";
 import Headshot from "../images/headshot.png";
 import Button from "../components/Button.astro";
+import CardLink from "../components/React/Card_Link";
+import Badge from "../components/Badge.astro";
 
 const technologies = [
   "TypeScript",
@@ -16,10 +20,14 @@ const technologies = [
   "Astro",
   "Remix",
   "NextJS",
-  "NodeJS",
+  "Node.js",
   "Express",
   "PostgreSQL",
 ];
+
+const projects = await getCollection("projects", ({ data }) => {
+  return data.featured;
+});
 ---
 
 <Layout title="Kyle Kettler | Frontend Engineer">
@@ -31,12 +39,12 @@ const technologies = [
           alt="headshot"
           width={120}
           height={120}
-          class="rounded-full"
+          class="rounded-full border-4 border-zinc-100/20"
           densities={[1.5, 2]}
         />
         <div class="flex flex-col gap-2 pr-16">
           <H1>
-            Hi, I'm Kyle. <span class="font-normal"
+            Hi, I'm Kyle. <span class="font-light text-zinc-300"
               >I'm a frontend engineer and designer.</span
             >
           </H1>
@@ -50,21 +58,72 @@ const technologies = [
         </div>
       </div>
       <Card>
-        <h2 class="font-light text-xl mb-4">Primary Technologies</h2>
+        <div class="mb-4">
+          <h2 class="text-lg">Primary Technologies</h2>
+        </div>
         <div class="flex flex-wrap gap-4 font-light text-sm text-zinc-300">
           {technologies.map((tech) => <div>{tech}</div>)}
         </div>
       </Card>
       <div>
-        <h2 class="font-light text-xl mb-2">About Me</h2>
+        <div class="mb-2">
+          <H2>About Me</H2>
+        </div>
         <p class="font-light leading-7 text-zinc-300">
           I am a frontend engineer with an extensive background in design. I
-          spent a decade in various design roles, beginning with print and
-          graphic design, then moving web and product design, and then learing
-          web development by building with Webflow. In 2023, I transisitoned to
-          frontend engineering full-time with a focus in TypeScript, React,
-          NodeJS, and relational databases.
+          spent a decade as a designer, focused on branding and UI design. In
+          2023, I transisitoned to frontend engineering full-time with a focus
+          in TypeScript, React, Node.js, and relational databases.
         </p>
+      </div>
+      <div class="flex flex-col gap-4">
+        <H2>Projects</H2>
+        {
+          projects.map((p) => (
+            <a href={`/projects/${p.slug}`}>
+              <CardLink client:visible>
+                <div class="flex justify-between items-center mb-4">
+                  <h2 class="font-semibold text-2xl">{p.data.title}</h2>
+                  <time
+                    class="text-zinc-500 text-xs font-light pb-2"
+                    datetime={p.data.date.toLocaleDateString(undefined, {
+                      month: "numeric",
+                      year: "numeric",
+                    })}
+                  >
+                    {p.data.date.toLocaleDateString(undefined, {
+                      month: "numeric",
+                      year: "numeric",
+                    })}
+                  </time>
+                </div>
+                <p class="mb-6 text-sm">{p.data.description}</p>
+                <h3 class="mb-2">Technogies Used</h3>
+                <div class="flex flex-wrap gap-3 font-light text-sm text-zinc-300">
+                  {p.data.technologies.map((tech) => (
+                    <Badge text={tech} />
+                  ))}
+                </div>
+              </CardLink>
+            </a>
+          ))
+        }
+      </div>
+      <div>
+        <H2>Posts</H2>
+      </div>
+      <div class="flex flex-col gap-4">
+        <h3 class="font-bold">About this Site</h3>
+        <p class="text-sm">
+          This site is built in Astro with TypeScript and it uses some React
+          components. It uses MDX and Astro Content Collections as a lightweight
+          CMS. It is hosted on Vercel.
+        </p>
+        <p class="text-sm">
+          You can read about why I chose Astro here and you can view the source
+          code on my Github.
+        </p>
+        <p class="text-sm">The typeface is Brockmann by Atipo Foundry.</p>
       </div>
     </div>
   </Main>
