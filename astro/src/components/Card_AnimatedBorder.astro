@@ -2,7 +2,7 @@
 
 ---
 
-<div class="box relative rounded-xl p-8 flex flex-col justify-center">
+<div class="box relative rounded-xl p-4 flex flex-col justify-center sm:p-6">
   <slot />
 </div>
 <style>
@@ -10,8 +10,8 @@
     border: 1px solid #0000;
     background:
       linear-gradient(#18181b, #18181b) padding-box,
-      linear-gradient(var(--angle), #18181b, #e8e9f671) border-box;
-    animation: 10s rotate linear infinite;
+      linear-gradient(var(--angle), #18181b, #f7f8fb71) border-box;
+    animation: 6s rotate linear infinite;
   }
 
   @keyframes rotate {

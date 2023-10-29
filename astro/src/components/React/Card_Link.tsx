@@ -22,7 +22,7 @@ export default function SpotlightCard({ children }: Props) {
 
   return (
     <div
-      className="group relative rounded-xl border border-zinc-800 bg-zinc-950 px-6 py-4 shadow-lg"
+      className="group relative rounded-xl border border-zinc-800 bg-zinc-950 p-4 shadow-lg sm:p-6"
       onMouseMove={handeMouseMove}>
       <motion.div
             className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"

@@ -9,7 +9,10 @@ export const collections ={
         title: z.string(),
         description: z.string(),
         featured: z.boolean(),
-        technologies: z.array(z.string()),
+        stack: z.array(z.string()),
+        additionalTech: z.array(z.string()).optional(),
+        github: z.string().url(),
+        live: z.string().url().optional(),
       })
   }),
   posts: defineCollection({

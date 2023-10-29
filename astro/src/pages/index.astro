@@ -37,51 +37,53 @@ const posts = await getCollection("posts");
 <Layout title="Kyle Kettler | Frontend Engineer">
   <Main>
     <div class="flex flex-col gap-16 animate-fade-in">
-      <div class="flex gap-4 items-center">
-        <Image
-          src={Headshot}
-          alt="headshot"
-          width={120}
-          height={120}
-          class="rounded-full border-4 border-zinc-100/20"
-          densities={[1.5, 2]}
-        />
-        <div class="flex flex-col gap-2 pr-16">
-          <H1>
-            Hi, I'm Kyle. <span class="font-light text-zinc-300"
-              >I'm a frontend engineer and designer.</span
-            >
-          </H1>
-          <div class="flex gap-2">
-            <Button to="https://github.com/kyle-kettler" text="Github" />
-            <Button
-              to="https://www.linkedin.com/in/kylekettler/"
-              text="LinkedIn"
-            />
+      <div>
+        <div
+          class="flex flex-col gap-4 items-start mb-8 sm:flex-row sm:items-center"
+        >
+          <Image
+            src={Headshot}
+            alt="headshot"
+            width={120}
+            height={120}
+            class="rounded-full border-4 border-zinc-100/20"
+            densities={[1.5, 2]}
+          />
+          <div class="flex flex-col gap-2 pr-8 sm:pr-16">
+            <H1>
+              Hi, I'm Kyle. <span class="font-light text-zinc-300"
+                >I'm a frontend engineer and designer.</span
+              >
+            </H1>
+            <div class="flex gap-2">
+              <Button to="https://github.com/kyle-kettler" text="Github" />
+              <Button
+                to="https://www.linkedin.com/in/kylekettler/"
+                text="LinkedIn"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <Card>
-        <div class="mb-4">
-          <h2 class="text-lg">Primary Technologies</h2>
+        <div>
+          <Card>
+            <div class="mb-4">
+              <h2 class="text-lg">Primary Skills</h2>
+            </div>
+            <div class="flex flex-wrap gap-4 font-light text-sm text-zinc-300">
+              {technologies.map((tech) => <div>{tech}</div>)}
+            </div>
+          </Card>
+          <p class="font-light leading-7 text-zinc-300 mt-6">
+            I am a frontend engineer with an extensive background in design. I
+            spent a decade as a designer, focused on branding and UI design. In
+            2023, I attended a software engineering boot camp and transitioned
+            to frontend engineering full-time with a focus in TypeScript, React,
+            CSS, Node.js, and relational databases.
+          </p>
         </div>
-        <div class="flex flex-wrap gap-4 font-light text-sm text-zinc-300">
-          {technologies.map((tech) => <div>{tech}</div>)}
-        </div>
-      </Card>
-      <div>
-        <div class="mb-2">
-          <H2>About Me</H2>
-        </div>
-        <p class="font-light leading-7 text-zinc-300">
-          I am a frontend engineer with an extensive background in design. I
-          spent a decade as a designer, focused on branding and UI design. In
-          2023, I transisitoned to frontend engineering full-time with a focus
-          in TypeScript, React, Node.js, and relational databases.
-        </p>
       </div>
       <div class="flex flex-col gap-4">
-        <H2>Projects</H2>
+        <H2>Things I've built</H2>
         {
           projects.map((p) => (
             <a href={`/projects/${p.slug}`}>
@@ -89,7 +91,7 @@ const posts = await getCollection("posts");
                 <div class="flex justify-between items-center mb-4">
                   <h2 class="font-semibold text-2xl">{p.data.title}</h2>
                   <time
-                    class="text-zinc-400 text-xs font-light pb-2 "
+                    class="text-zinc-400 text-xs font-light"
                     datetime={p.data.date.toLocaleDateString(undefined, {
                       month: "numeric",
                       year: "numeric",
@@ -104,7 +106,7 @@ const posts = await getCollection("posts");
                 <p class="mb-6 text-sm">{p.data.description}</p>
                 <h3 class="mb-2">Stack</h3>
                 <div class="flex flex-wrap gap-3 font-light text-sm text-zinc-300">
-                  {p.data.technologies.map((tech) => (
+                  {p.data.stack.map((tech) => (
                     <Badge text={tech} />
                   ))}
                 </div>
@@ -115,17 +117,17 @@ const posts = await getCollection("posts");
       </div>
       <div>
         <div class="mb-2">
-          <H2>Posts</H2>
+          <H2>My writings</H2>
         </div>
         {
           posts.map((post) => (
             <a
               href={`/posts/${post.slug}`}
-              class="flex justify-between items-center hover:underline"
+              class="flex justify-between items-center hover:text-zinc-400 transition-colors duration-300"
             >
               <h3>{post.data.title}</h3>
               <time
-                class="text-zinc-400 text-xs font-light pb-2"
+                class="text-zinc-400 text-xs font-light"
                 datetime={post.data.date.toLocaleDateString(undefined, {
                   month: "numeric",
                   day: "numeric",
@@ -156,8 +158,16 @@ const posts = await getCollection("posts");
           </InlineLink>.
         </p>
         <p class="text-sm">
-          You can read about why I chose Astro here or check out the source
-          code.
+          You can read about why I chose Astro <InlineLink
+            to="/posts/building-with-astro"
+          >
+            here
+          </InlineLink> or check out the <InlineLink
+            to="https://github.com/kyle-kettler/kylekettler-dot-com"
+            blank
+          >
+            source code
+          </InlineLink>.
         </p>
         <p class="text-sm">
           The typeface is Brockmann by <InlineLink
