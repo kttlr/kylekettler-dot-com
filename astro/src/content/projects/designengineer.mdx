@@ -19,26 +19,13 @@ github: https://github.com/kyle-kettler/job-board
 live: https://job-board.kttlr.io/
 ---
 
-A fictional job board for developers to find hybrid design and development roles.
+import { Image } from "astro:assets";
+import gif1 from "./images/designengineer-gif1.gif";
+import gif2 from "./images/designengineer-gif2.gif";
 
 ## Why I Built this App
 
-Before I became a software engineer, I spent a decade as a designer. I would love to be in a role that could use both my design and development skill sets, so I created a job board that I wish existed.
-
-## Technologies Used
-
-- React
-- Webpack
-- Tailwind CSS
-- TypeScript
-- Node.js
-- Express
-- PostgreSQL
-- AWS EC2
-
-## Live Demo
-
-Try out the app at [https://job-board.kttlr.io/]
+For my final project at LearningFuze, I wanted to create a full-stack app that I would actually use if it existed. Before I became a software engineer, I spent a decade as a designer and I would love to be in a development role that utilizes my design skills. This is the job board that I wish existed for devs like me, those that are as comfortable in Figma as they are in a code editor.
 
 ## Features
 
@@ -47,3 +34,18 @@ Try out the app at [https://job-board.kttlr.io/]
 - Users can create an account.
 - Users can submit applications for the jobs.
 - Users see a list of all the jobs they have applied for
+
+## Quick Demos
+
+<Image
+  src={gif1}
+  alt="A gif showing off the search and filtering features"
+  width={800}
+  height={650}
+/>
+<Image
+  src={gif2}
+  alt="A gif showing off the job application form with a drag and drop resume uploader."
+  width={800}
+  height={650}
+/>

@@ -70,12 +70,14 @@ const { Content } = await project.render();
           )
         }
       </div>
-      <Image
-        src={project.data.image}
-        alt={project.data.title}
-        width={600}
-        height={400}
-      />
+      <div class="mb-4">
+        <Image
+          src={project.data.image}
+          alt={project.data.title}
+          width={800}
+          height={650}
+        />
+      </div>
       <div class="prose prose-invert">
         <Content />
       </div>

@@ -9,24 +9,12 @@ github: https://github.com/kyle-kettler/game-queue
 live: https://kyle-kettler.github.io/game-queue/
 ---
 
-A frontend web app created for gamers to keep track of the games they want to play.
+import { Image } from "astro:assets";
+import gif1 from "./images/gamequeue-gif1.gif";
 
 ## Why I Built this App
 
 I love video games, and there are many games I want to play, so many that it is hard to remember them all. So I made this little app to help.
-
-## Technologies Used
-
-- Vanilla Javascript
-- AJAX
-- RAWG API for game data
-- CSS3
-- HTML5
-- Localstorage to save user data
-
-## Live Demo
-
-Try it out at [https://kyle-kettler.github.io/game-queue/]
 
 ## Features
 
@@ -34,3 +22,12 @@ Try it out at [https://kyle-kettler.github.io/game-queue/]
 - Users can save games as 'played' or 'want to play'
 - Users can rate the games they have played
 - Users can create a separate list of their favorite games
+
+## Quick Demos
+
+<Image
+  src={gif1}
+  alt="A gif showing the interface of GameQueue"
+  width={800}
+  height={650}
+/>
