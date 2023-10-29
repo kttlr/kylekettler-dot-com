@@ -102,7 +102,7 @@ const posts = await getCollection("posts");
                   </time>
                 </div>
                 <p class="mb-6 text-sm">{p.data.description}</p>
-                <h3 class="mb-2">Technogies Used</h3>
+                <h3 class="mb-2">Stack</h3>
                 <div class="flex flex-wrap gap-3 font-light text-sm text-zinc-300">
                   {p.data.technologies.map((tech) => (
                     <Badge text={tech} />
@@ -120,12 +120,12 @@ const posts = await getCollection("posts");
         {
           posts.map((post) => (
             <a
-              href="#"
+              href={`/posts/${post.slug}`}
               class="flex justify-between items-center hover:underline"
             >
               <h3>{post.data.title}</h3>
               <time
-                class="text-zinc-400 text-xs font-light pb-2 "
+                class="text-zinc-400 text-xs font-light pb-2"
                 datetime={post.data.date.toLocaleDateString(undefined, {
                   month: "numeric",
                   day: "numeric",
@@ -142,14 +142,18 @@ const posts = await getCollection("posts");
           ))
         }
       </div>
-      <div class="flex flex-col gap-4 text-zinc-200">
+      <div class="flex flex-col gap-4 text-zinc-200 mt-12">
         <h3 class="font-bold">About this Site</h3>
         <p class="text-sm leading-6">
           This site is built in <InlineLink to="https://astro.build/" blank>
             Astro
           </InlineLink> and uses TypeScript, React, Tailwind, Framer Motion,
-          MDX, and Astro Content Collections as a file-based CMS. It is hosted
-          on Vercel.
+          MDX, and Astro Content Collections. It is hosted on <InlineLink
+            to="https://vercel.com/"
+            blank
+          >
+            Vercel
+          </InlineLink>.
         </p>
         <p class="text-sm">
           You can read about why I chose Astro here or check out the source

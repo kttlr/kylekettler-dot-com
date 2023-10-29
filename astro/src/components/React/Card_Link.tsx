@@ -1,7 +1,7 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
 import type { MouseEvent } from 'react';
 
-interface Props {
+type Props = {
   children: React.ReactNode;
 }
 

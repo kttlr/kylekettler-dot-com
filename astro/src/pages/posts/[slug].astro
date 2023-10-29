@@ -1,10 +1,14 @@
 ---
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import H1 from "../../components/Typography/H1.astro";
+import Main from "../../components/Main.astro";
+import Footer from "../../components/Footer.astro";
 
 export async function getStaticPaths() {
-  const projects = await getCollection("posts");
-  const paths = projects.map((post) => {
+  const posts = await getCollection("posts");
+  const paths = posts.map((post) => {
     return {
       params: {
         slug: post.slug,
@@ -16,6 +20,21 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  project: CollectionEntry<"posts">;
+  post: CollectionEntry<"posts">;
 };
+
+const { post } = Astro.props;
+const { Content } = await post.render();
 ---
+
+<Layout title={post.data.title}>
+  <Main>
+    <div class="mb-12">
+      <H1>{post.data.title}</H1>
+    </div>
+    <div class="prose prose-zinc dark:prose-invert">
+      <Content />
+    </div>
+    <Footer />
+  </Main>
+</Layout>

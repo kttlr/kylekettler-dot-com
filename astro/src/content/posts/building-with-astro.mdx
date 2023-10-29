@@ -1,5 +1,88 @@
 ---
-title: Building My Portfolio with Astro
+title: Building My Website with Astro
 description: A breakdown of how my site works and why I chose to build it with Astro.
 date: 2023-10-27
 ---
+
+I've never really had a personal website that I was proud of, I always have ambitious ideas for what I wanted in my personal site, but never had the ability or the time to make them happen, until now.
+
+I recently completed a software engineering boot camp. While I am looking for my first position as a software engineer, I decided it was time to make the portfolio I always dreamed of having and one that will hopefully help me land a job.
+
+When approaching the tech stack for this project, there were three things that were primarily important to me.
+
+1. **Performance.** I wanted it to be fast, both for visitor and for me as the developer during compiling, building, and deploying.
+2. **Content.** I knew the site was going to be content heavy, so I wanted to find a solution that would allow me to easily add and make changes to the content.
+3. **Interactivity.** Even though my site will be static for the most part, I wanted to be able to add interactivity when I wanted to, but with out the bloat of building what is essentially a blog in React.
+
+After experimenting with a few different stacks using headless CMS systems for the backend and Next.js or Remix for the frontend, they all felt like overkill for my needs. In the end, I decided on Astro, MDX, Tailwind, and TypeScript for the primary technology.
+
+## Astro
+
+Astro is a modern web framework, akin to Next.js, Nuxt.js, and SvelteKit. However it is different from those frameworks in some key ways that make big differences when it comes to performance, developer experience, and working with content.
+
+1. By default, Astro ships **zero** JavaScript to the browser. This can be changed when needed, but it makes sites built in Astro fast by default.
+2. Built in Markdown and MDX support. Most of the content on this site are MDX files and Astro knows how to read them out of the box.
+3. Astro allows you to use other UI frameworks when you want. For example, I have React components running on this site, in my .astro files and everything works by default. And if I want to run JavaScript in those components, I just have to add a line to the component.
+4. Astro integrations make lots of common, annoying tasks easy. For instance, adding Tailwind to a project simply requires one command `npx astro add tailwind`. No manually installing, or adding a config, or importing tailwind into the CSS. Astro has integrations like this for hundreds of solutions.
+
+These are just a few of the many reasons why I chose to use Astro and why I love building with it. Once you experience the magic of Astro, it is hard to want to build with anything else.
+
+Astro also gives me the flexibility to expand this site into a full-stack application if the need arises for backend functionality.
+
+## MDX
+
+I've been using Markdown in my note taking app of choice (Obsidian) for years. So with Astro's built-in MDX support, it was a no brainer for me to use it for my content pages. MDX is basically Markdown with one extra feature, support for inline JSX components. This allows me create highly interactive articles with demos when needed.
+
+Another big reason for using Markdown based files is code syntax highlighting. Thankfully, Astro has me covered there as well, because Astro's Markdown support includes syntax highlighting capabilities.
+
+## Tailwind
+
+It seems to me that if you are a web dev, you either love or hate Tailwind. I happen to love it. Even before I knew about Tailwind, I would write my CSS with utility based classes like `flex-group-vert` or `col-1-2` and so on. So when I discovered Tailwind, it immediately made sense to me and made my workflow way faster because I didn't need to spend time writing my own utility classes. Sure, the classes are ugly in the html, but for me the speed and flexibility that it gives more than make up for that one downside.
+
+## TypeScript
+
+For those that don't know, TypeScript is a superset of JavaScript that adds type safety and a compiler to the language. This allows it to catch most errors in the editor before the code runs in the browser.
+
+Learning TypeScript was a frustrating experience for me. I was used to working with vanilla javascript where my code would always run and I could debug in the browser if I was having errors, but that doesn't work for TypeScript. It catches most errors and stops the code from compiling. Therefore, it won't run. For me this lead to a lot of frustrating error messages. I felt as if I couldn't see what was going wrong because I wasn't used to working with a compiler.
+
+However, once it clicked that the errors were there to help me, I realized it saved me endless time debugging in the browser just to figure out what was going wrong, I began to love those red squiggly lines. Finding the Total Typescript VSCode extension also helped to understand the error messages. Now I can't imagine writing JS with out using TypeScript, so it was a natural choice to use it in building my portfolio. Astro also has a deep integration with TypeScript making the experience even better.
+
+## Content Collections
+
+From the Astro docs:
+
+> Content collections are the best way to manage and author content in any Astro project. Collections help to organize your documents, validate your frontmatter, and provide automatic TypeScript type-safety for all of your content.
+
+With content collections, you can essentially build a basic, lightweight, file-based CMS within your Astro project. When used in conjunction with TypeScript and Zod, it makes adding and updating content pages a breeze and provides an excellent developer experiences.
+
+For example, here is my content collection config for my project collection. This file defines the types that Astro expects to receive in the frontmatter of the MDX files.
+
+```typescript
+import { defineCollection, z } from "astro:content";
+
+export const collections = {
+  projects: defineCollection({
+    schema: ({ image }) =>
+      z.object({
+        date: z.date(),
+        image: image(),
+        title: z.string(),
+        description: z.string(),
+        featured: z.boolean(),
+        technologies: z.array(z.string()),
+      }),
+  }),
+};
+```
+
+Once I have this config file written, I can use another Astro method `getCollection()` to fetch the files from the content folder like so:
+
+```typescript
+const posts = await getCollection("projects");
+```
+
+This returns an array of all the files in the "projects" content collection with full intellisense and type safety in my editor. Astro feels like magic.
+
+## Vercel
+
+Vercel is the gold standard of developer experience for deployments. They are the official hosting partner of Astro. With Astro integrations, deploying my site entailed a single command to prepare my repo for Vercel, then two clicks to deploy it from my Vercel dashboard. Sure, the experience would be similar with Netlify or Fly.io, but as a former designer, I appreciate Vercel's care in crafting their UX and that is what made me choose Vercel in the end.
