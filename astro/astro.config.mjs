@@ -135,4 +135,5 @@ const og = () => ({
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react(), mdx(), og()],
+  site: "https://kylekettler.com",
 });
