@@ -6,8 +6,8 @@ type Props = {
 
 const title = Astro.props.title ?? "Kyle Ketter | Frontend Engineer";
 const description = Astro.props.description ?? "";
-const canonicalURL = Astro.site;
-const image = Astro.site + "og.png";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const image = new URL(canonicalURL.pathname + "og.png", Astro.site);
 ---
 
 <title>{title}</title>
