@@ -1,0 +1,47 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Main from "../components/Main.astro";
+import H1 from "../components/Typography/H1.astro";
+import H2 from "../components/Typography/H2.astro";
+import InlineLink from "../components/Typography/InlineLink.astro"
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="The Stuff I Use">
+  <Main>
+    <div class="flex flex-col">
+      <div class="mb-6">
+        <H1>The Stuff I Use</H1>
+      </div> 
+      <H2>Dev Environment</H2>
+      <ul class="flex flex-col gap-4 mt-4 mb-10 list-disc ml-4">
+        <li>My editor of choice is <InlineLink to="https://neovim.io/" blank>Neovim</InlineLink> (I use Neovim, btw) with a custom config.</li>
+        <li>For a terminal emulator, I use <InlineLink to="https://wezfurlong.org/wezterm/index.html" blank>WezTerm</InlineLink>. I've tried Kitty, Alacrity, and Warp. WezTerm is the best and it's writen in Rust.</li>
+        <li>I use <InlineLink to="https://brew.sh/" blank>Homebrew</InlineLink> for my desktop package manager.</li>
+        <li>And <InlineLink to="https://github.com/koekeishiya/yabai" blank>Yabai</InlineLink> for window management.</li>
+        <li>My font is <InlineLink to="https://www.jetbrains.com/lp/mono/" blank>JetBrains Mono</InlineLink>, the nerd font version.</li>
+      </ul>
+      <H2>Apps</H2>
+      <div class="flex flex-col gap-4 mt-4 mb-10">
+        <p>Any writing I do on computer is done in <InlineLink to="https://obsidian.md/" blank>Obsidian</InlineLink>.</p>
+        <p><InlineLink to="" blank>1Password</InlineLink></p>
+        <p><InlineLink to="" blank>Spotify</InlineLink> for music, and podcasts.</p>
+        <p><InlineLink to="" blank>Arc</InlineLink></p>
+        <p><InlineLink to="" blank>Figma</InlineLink></p>
+        <p><InlineLink to="" blank>Raycast</InlineLink></p>
+        <p>I use <InlineLink to="" blank>Sketchybar</InlineLink> for a custom top bar.</p>
+      </div>
+      <H2>Gear</H2>
+      <div class="flex flex-col gap-4 mt-4 mb-10">
+        <p><InlineLink to="" blank>Unicorne MX</InlineLink></p>
+        <p>2013 M1 MacBook Pro</p>
+        <p>Audient evo 4</p>
+        <p>Neat Super Bee</p>
+        <p>HiFiMan HE400i</p>
+        <p>Logitech MX Master 2</p>
+        <p>Elgato Streamcam</p>
+      </div>
+    </div>
+    <Footer />
+  </Main>
+</Layout>
