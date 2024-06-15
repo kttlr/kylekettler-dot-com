@@ -4,14 +4,14 @@ export const collections ={
   projects: defineCollection({
     schema: ({image}) =>
       z.object({
-        date: z.date(),
-        image: image(),
+        date: z.union([z.date(), z.string()]),
+        image: image().optional(),
         title: z.string(),
         description: z.string(),
         featured: z.boolean(),
         stack: z.array(z.string()),
         additionalTech: z.array(z.string()).optional(),
-        github: z.string().url(),
+        github: z.string().url().optional(),
         live: z.string().url().optional(),
       })
   }),
