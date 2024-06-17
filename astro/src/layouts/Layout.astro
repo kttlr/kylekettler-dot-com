@@ -11,7 +11,7 @@ interface Props {
 
 const {
   title,
-  description = "Kyle Kettler - Frontend Software Engineer",
+  description = "Kyle Kettler - Software Developer",
 } = Astro.props;
 ---
 
@@ -23,10 +23,10 @@ const {
     <ViewTransitions />
   </head>
   <body
-    class="bg-zinc-950 text-zinc-100 selection:bg-zinc-300 selection:text-zinc-900 antialiased"
+    class="bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-300 selection:text-zinc-900"
   >
     <div
-      class="min-h-screen pb-4 bg-gradient-to-tl from-zinc-950 via-zinc-700/10 to-zinc-950/80"
+      class="min-h-screen bg-gradient-to-tl from-zinc-950 via-zinc-700/10 to-zinc-950/80 pb-4"
     >
       <Navbar />
       <slot />

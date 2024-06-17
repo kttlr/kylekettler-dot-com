@@ -30,28 +30,30 @@ const projects = await getCollection("projects", ({ data }) => {
   return data.featured;
 });
 
+const projectsReversed = projects.reverse();
+
 const posts = await getCollection("posts");
 ---
 
-<Layout title="Kyle Kettler | Frontend Engineer">
+<Layout title="Kyle Kettler | Software Developer">
   <Main>
-    <div class="flex flex-col gap-16 animate-fade-in">
+    <div class="flex animate-fade-in flex-col gap-16">
       <div>
         <div
-          class="flex flex-col gap-4 items-start mb-8 sm:flex-row sm:items-center"
+          class="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
         >
           <Image
             src={Headshot}
             alt="headshot"
             width={120}
             height={120}
-            class="rounded-[3rem] border-4 border-zinc-100/20"
+            class="rounded-[3rem] border-4 border-teal-200"
             densities={[1.5, 2]}
           />
           <div class="flex flex-col gap-2 pr-8 sm:pr-16">
             <H1>
               Hi, I'm Kyle. <span class="font-light text-zinc-300"
-                >I'm a frontend engineer and designer.</span
+                >I'm a designer turned software developer.</span
               >
             </H1>
             <div class="flex gap-2">
@@ -69,65 +71,33 @@ const posts = await getCollection("posts");
             <div class="mb-4">
               <h2 class="text-lg">Primary Skills</h2>
             </div>
-            <div class="flex flex-wrap gap-4 font-light text-sm text-zinc-300">
+            <div class="flex flex-wrap gap-4 text-sm font-light text-zinc-300">
               {technologies.map((tech) => <div>{tech}</div>)}
             </div>
           </Card>
-          <p class="font-light leading-7 text-zinc-300 mt-6">
-            I am a frontend engineer with an extensive background in design. I
-            spent a decade as a designer, focused on branding and UI design. In
-            2023, I attended a software engineering boot camp and transitioned
-            to frontend engineering full-time with a focus in TypeScript, React,
-            CSS, Node.js, and relational databases.
+          <p class="mt-6 font-light leading-7 text-zinc-300">
+            I am a software developer with an extensive background in design. Before 
+            becoming a developer I spent a decade as a designer, primarily focused on 
+            web and UI design. Currently, I am Product Engineer at <InlineLink
+              to="https://pulpitai.com/"
+              blank>Pulpit AI</InlineLink>.
           </p>
         </div>
       </div>
-      <div class="flex flex-col gap-4">
-        <H2>Things I've built</H2>
-        {
-          projects.map((p) => (
-            <a href={`/projects/${p.slug}`}>
-              <CardLink client:visible>
-                <div class="flex justify-between items-center mb-4">
-                  <h2 class="font-semibold text-2xl">{p.data.title}</h2>
-                  <time
-                    class="text-zinc-400 text-xs font-light"
-                    datetime={p.data.date.toLocaleDateString(undefined, {
-                      month: "numeric",
-                      year: "numeric",
-                    })}
-                  >
-                    {p.data.date.toLocaleDateString(undefined, {
-                      month: "numeric",
-                      year: "numeric",
-                    })}
-                  </time>
-                </div>
-                <p class="mb-6 text-sm">{p.data.description}</p>
-                <h3 class="mb-2">Stack</h3>
-                <div class="flex flex-wrap gap-3 font-light text-sm text-zinc-300">
-                  {p.data.stack.map((tech) => (
-                    <Badge text={tech} />
-                  ))}
-                </div>
-              </CardLink>
-            </a>
-          ))
-        }
-      </div>
       <div>
-        <div class="mb-2">
-          <H2>My writings</H2>
+        <div class="mb-4">
+          <H2>Posts</H2>
         </div>
+        <div class="space-y-3">
         {
           posts.map((post) => (
             <a
               href={`/posts/${post.slug}`}
-              class="flex justify-between items-center hover:text-zinc-400 transition-colors duration-300"
+              class="flex items-center justify-between transition-colors duration-300 hover:text-teal-200"
             >
               <h3>{post.data.title}</h3>
               <time
-                class="text-zinc-400 text-xs font-light"
+                class="text-xs font-light text-zinc-400"
                 datetime={post.data.date.toLocaleDateString(undefined, {
                   month: "numeric",
                   day: "numeric",
@@ -143,8 +113,31 @@ const posts = await getCollection("posts");
             </a>
           ))
         }
+        </div>
       </div>
-      <div class="flex flex-col gap-4 text-zinc-200 mt-12">
+      <div class="flex flex-col gap-4">
+        <H2>Things I've built (or helped build)</H2>
+        {
+          projectsReversed.map((p) => (
+            <a href={`/projects/${p.slug}`}>
+              <CardLink client:visible>
+                <div class="mb-4 flex items-center justify-between">
+                  <h2 class="text-2xl font-semibold">{p.data.title}</h2>
+                  <p class="text-xs font-light text-zinc-400">{p.data.date}</p>
+                </div>
+                <p class="mb-6 text-sm">{p.data.description}</p>
+                <h3 class="mb-2">Stack</h3>
+                <div class="flex flex-wrap gap-3 text-sm font-light text-zinc-300">
+                  {p.data.stack.map((tech) => (
+                    <Badge text={tech} />
+                  ))}
+                </div>
+              </CardLink>
+            </a>
+          ))
+        }
+      </div>
+      <div class="mt-12 flex flex-col gap-4 text-zinc-200">
         <h3 class="font-bold">About this Site</h3>
         <p class="text-sm leading-6">
           This site is built in <InlineLink to="https://astro.build/" blank>

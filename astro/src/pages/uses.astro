@@ -1,0 +1,63 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Main from "../components/Main.astro";
+import H1 from "../components/Typography/H1.astro";
+import H2 from "../components/Typography/H2.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Uses | Kyle Kettler">
+  <Main>
+    <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-2">
+        <H1>Uses</H1>
+        <p>Tools and tech I use.</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <H2>Dev Environment</H2>
+        <ul class="space-y-2 pl-4">
+          <li>Terminal: Wezterm</li>
+          <li>Shell: zsh</li>
+          <li>Editor: Neovim</li>
+          <li>Font: Jetbrains Mono</li>
+          <li>Color Scheme: Kanagawa</li>
+          <li>Window Manager: Yabai</li>
+          <li>OS Package Manager: Homebrew</li>
+        </ul>
+      </div>
+      <div class="flex flex-col gap-2">
+        <H2>Gear</H2>
+        <ul class="space-y-2 pl-4">
+          <li>Computer: 2021 M1 MacBook Pro </li>
+          <li>Keyboard: Unicorne MX</li>
+          <li>Microphone: Neat Super Bee</li>
+          <li>Audio Interface: Audient Evo 4</li>
+          <li>Mouse: Logitech MX Master 3</li>
+          <li>Headphones: HiFiMan HE400i</li>
+          <li>Camera: Elgato Streamcam</li>
+          <li>Backpack: Peak Designs</li>
+        </ul>
+      </div>
+      <div class="flex flex-col gap-2">
+        <H2>Software</H2>
+        <ul class="space-y-2 pl-4">
+          <li>Browser: Arc</li>
+          <li>Email: Spark (looking for something better)</li>
+          <li>Notes: Obsidian</li>
+          <li>Calendar: Notion Calendar</li>
+          <li>Task Manager: Todoist/Linear</li>
+          <li>Music: Spotify</li>
+          <li>Design: Figma</li>
+          <li>Launcher: Raycast</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mb-2">Changelog</p>
+          <ul class="space-y-2 pl-4">
+            <li>06/14/2024 - v1.0</li>
+           </ul>
+      <div>
+    </div>
+    <Footer />
+  </Main>
+</Layout>
