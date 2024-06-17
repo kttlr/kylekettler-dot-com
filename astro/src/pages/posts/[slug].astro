@@ -29,8 +29,9 @@ const { Content } = await post.render();
 
 <Layout title={`${post.data.title} | Kyle Kettler`}>
   <Main>
-    <div class="mb-12">
+    <div class="mb-12 flex flex-col gap-2">
       <H1>{post.data.title}</H1>
+      <p class="text-sm text-gray-500">by Kyle Kettler</p>
     </div>
     <div class="prose-lg prose-invert">
       <Content />

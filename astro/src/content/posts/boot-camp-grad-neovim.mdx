@@ -4,6 +4,8 @@ description: My journey from VSCode to Neovim
 date: 2024-06-15
 ---
 import InlineLink from "../../components/Typography/InlineLink.astro";
+import { Image } from "astro:assets"
+import configScreenshot from "./images/neovim-config.webp";
 
 The first time I saw someone writing code, it was on my college roommate on his MacBook pro in 2012. He was using Coda, a MacOS only web focused editor. At the time I knew nothing about coding, but I was mesmerized watching him write the lines of code that became a website before my eyes. It would be a long time before I was that excited by seeing someone traverse text, but we’ll get to that shortly. 
 
@@ -31,10 +33,12 @@ LazyVim was great, but I wanted my Neovim to be exactly what I wanted it to be, 
 
 After a few days of setup, my config was in a spot I was happy with and could be productive with. There was a lot of frustration early on, but once I understood the patterns of how to install plugins, everything was pretty straightforward. The most difficult part was getting auto complete working properly (to be honest, I still don’t have this working exactly how I want it, but it is good enough for now). Perhaps in the future I’ll do a writeup on some of my favorite plugins. 
 
-My config continues to evolve and as I am becoming more skilled, I am able to more interesting things with my setup. Recently, I added some custom Treesitter queries to improve the syntax highlighting on `.mdx` files. And I know I am still just scratching the surface what is possible in Neovim.
+My config continues to evolve as I learn more about Neovim and I am able to more interesting things with my setup. For instance, I recently added some custom Treesitter queries to improve the syntax highlighting on `.mdx` files. And I know I am still just scratching the surface what is possible in Neovim. You can look at my config, along with other dotfiles for my primary tools, on my <InlineLink to="https://github.com/kyle-kettler/dotfiles" blank={true}>GitHub</InlineLink>. Below is a screenshot of my current config with a TypeScript file open.
 
-At this point, Neovim has been my only code editor for the better part of a year. The basic motions feel completely natural and I am slowly learning more and more complex motions. I may not have the speed and momentum of the Primeagen, but I am far faster and more productive than I ever was in VS Code. I am now a Vim user through and through, I may not use Neovim for the rest of my career, but it is going to take an incredible tool to get me to even consider switching.
+<Image src={configScreenshot} alt="My Neovim config with a TypeScript file open" />
 
-If anyone has made it this far, and you don’t have any experience with Vim, I would suggest giving it a try. Start with Vim motions in your editor of choice (they basically all have a Vim mode of some kind) and then once you are comfortable with navigating and editing text, consider working directly from the terminal. I think moving to a terminal based workflow will be the single best decision of my development career. 
+At this point, Neovim has been my only code editor for the better part of a year. The basic motions feel completely natural and I am slowly learning more and more complex motions. I may not have the speed and momentum of the Primeagen, but I am far faster and more productive than I ever was in VS Code. I am now a Vim user through and through, even if I don't use Neovim for the rest of my career, I am certain I will always use Vim motions.
 
-Working from the terminal didn’t inherently make me into a better programmer, but it did open my eyes to the larger world of computer science that I didn’t get exposed to through my boot camp. The people I learned how to use Neovim from have opened my eyes to things like compilers and compiled languages, functional programming, and low-level programming. It broke me out of the JavaScript only world that is so common to end up in when you go through a boot camp. And less JavaScript is surely a good thing. 
+If anyone has made it this far, and you don’t have any experience with Vim, I would suggest giving it a try. Start with Vim motions in your editor of choice (basically every editor has a Vim mode of some kind) and then once you are comfortable with navigating and editing text, consider working directly from the terminal. I am convinced that moving to a terminal based workflow will end up being the single best decision of my development career. 
+
+Working from the terminal hasn't inherently made me a better programmer, but it did open my eyes to the larger world of computer science that I didn’t get exposed to through my boot camp. The people I learned how to use Neovim from have opened my eyes to things like compilers and compiled languages, functional programming, and low-level programming. Even though I still primarily work in the world of JavaScript, this journey has started to break me out of the JavaScript only world that is common to end up in post boot camp.
