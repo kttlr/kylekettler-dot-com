@@ -7,7 +7,7 @@ import H1 from "../components/Typography/H1.astro";
 import H2 from "../components/Typography/H2.astro";
 import InlineLink from "../components/Typography/InlineLink.astro";
 import Card from "../components/Card_AnimatedBorder.astro";
-import Headshot from "../images/headshot.png";
+import Portrait from "../images/portrait.png";
 import Button from "../components/Button.astro";
 import CardLink from "../components/React/Card_Link";
 import Badge from "../components/Badge.astro";
@@ -37,17 +37,17 @@ const posts = await getCollection("posts");
 
 <Layout title="Kyle Kettler | Software Developer">
   <Main>
-    <div class="animate-fade-in flex flex-col gap-16">
+    <div class="flex animate-fade-in flex-col gap-16">
       <div>
         <div
           class="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
         >
           <Image
-            src={Headshot}
+            src={Portrait}
             alt="headshot"
-            width={120}
-            height={120}
-            class="rounded-[3rem] border-4 border-teal-200"
+            width={140}
+            height={140}
+            class="rounded-[3rem] ring-4 ring-teal-200"
             densities={[1.5, 2]}
           />
           <div class="flex flex-col gap-2 pr-8 sm:pr-16">
@@ -57,7 +57,7 @@ const posts = await getCollection("posts");
               >
             </H1>
             <div class="flex gap-2">
-              <Button to="https://github.com/kyle-kettler" text="Github" />
+              <Button to="https://github.com/kttlr" text="Github" />
               <Button
                 to="https://www.linkedin.com/in/kylekettler/"
                 text="LinkedIn"
