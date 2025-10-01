@@ -47,6 +47,7 @@ export default function SourdoughCalculator() {
     starter: 100,
     salt: 10,
   });
+  const [showRecipe, setShowRecipe] = useState(false);
 
   const getTotalFlour = () => {
     return ingredients.flours.reduce((sum, flour) => sum + flour.amount, 0);
@@ -429,7 +430,285 @@ export default function SourdoughCalculator() {
           </button>
         </div>
       </div>
+
+      {/* Recipe Instructions */}
+      <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
+        <button
+          onClick={() => setShowRecipe(!showRecipe)}
+          className="flex w-full items-center justify-between text-left"
+        >
+          <h2 className="text-xl font-semibold">Instructions</h2>
+          <motion.svg
+            animate={{ rotate: showRecipe ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="h-6 w-6 text-zinc-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M19 9l-7 7-7-7"
+            />
+          </motion.svg>
+        </button>
+
+        <motion.div
+          initial={false}
+          animate={{
+            height: showRecipe ? "auto" : 0,
+            opacity: showRecipe ? 1 : 0,
+          }}
+          transition={{ duration: 0.3 }}
+          className="overflow-hidden"
+        >
+          <div className="mt-6 space-y-6">
+            {/* Ingredients */}
+            <div>
+              <h3 className="mb-3 text-lg font-medium text-zinc-200">
+                Ingredients
+              </h3>
+              <div className="space-y-2 text-base text-zinc-300">
+                {ingredients.flours.map((flour) => (
+                  <div key={flour.id} className="flex justify-between">
+                    <span>{flour.name}</span>
+                    <span className="font-medium text-teal-200">
+                      {flour.amount}g
+                    </span>
+                  </div>
+                ))}
+                <div className="flex justify-between border-t border-zinc-800 pt-2">
+                  <span>Water (lukewarm)</span>
+                  <span className="font-medium text-teal-200">
+                    {ingredients.water}g
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Active starter</span>
+                  <span className="font-medium text-teal-200">
+                    {ingredients.starter}g
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Salt</span>
+                  <span className="font-medium text-teal-200">
+                    {ingredients.salt}g
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Instructions */}
+            <div>
+              <h3 className="mb-3 text-lg font-medium text-zinc-200">
+                Instructions
+              </h3>
+              <div className="space-y-4">
+                {/* Mixing */}
+                <div>
+                  <h4 className="mb-2 text-base font-semibold text-teal-400">
+                    Mixing & Autolyse
+                  </h4>
+                  <ol className="space-y-2 text-base text-zinc-300">
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">1.</span>
+                      <span>Combine all flours and blend thoroughly</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">2.</span>
+                      <span>
+                        Add lukewarm water and combine with bench scraper
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">3.</span>
+                      <span>Autolyse for 1 hour</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">4.</span>
+                      <span>
+                        Add starter and combine using lobster claw pinching
+                        method
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">5.</span>
+                      <span>
+                        Add salt and pour a splash of warm water over it.
+                        Combine thoroughly
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">6.</span>
+                      <span>
+                        Cover with a damp towel and let sit for 10 minutes
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">7.</span>
+                      <span>
+                        Mix by folding for 10 minutes or until you can form a
+                        gluten window
+                      </span>
+                    </li>
+                  </ol>
+                </div>
+
+                {/* Bulk Ferment */}
+                <div>
+                  <h4 className="mb-2 text-base font-semibold text-teal-400">
+                    Bulk Fermentation
+                  </h4>
+                  <ol className="space-y-2 text-base text-zinc-300" start={8}>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">8.</span>
+                      <span>
+                        Begin bulk ferment: cover with damp towel and let sit
+                        for 1 hour
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">9.</span>
+                      <span>
+                        Fold gently every hour. Continue for 4-7 hours total or
+                        until dough doubles in size and appears whipped
+                      </span>
+                    </li>
+                  </ol>
+                </div>
+
+                {/* Shaping */}
+                <div>
+                  <h4 className="mb-2 text-base font-semibold text-teal-400">
+                    Pre-Shaping & Shaping
+                  </h4>
+                  <ol className="space-y-2 text-base text-zinc-300" start={10}>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">10.</span>
+                      <span>
+                        Dust surface with flour and allow the dough to pour
+                        itself out from the bowl
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">11.</span>
+                      <span>
+                        Cover the loaf with a damp towel and rest for 10 minutes
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">12.</span>
+                      <span>
+                        Flip the loaf over and gently tug outwards, being sure
+                        to retain bubbles
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">13.</span>
+                      <span>
+                        Gently fold the sides in, pinching at the seam if
+                        necessary. Then roll up like a jelly roll (or
+                        overstuffed burrito)
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">14.</span>
+                      <span>
+                        Transfer to proofing basket, seam side up, using bench
+                        scraper
+                      </span>
+                    </li>
+                  </ol>
+                </div>
+
+                {/* Proofing */}
+                <div>
+                  <h4 className="mb-2 text-base font-semibold text-teal-400">
+                    Cold Proof
+                  </h4>
+                  <ol className="space-y-2 text-base text-zinc-300" start={15}>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">15.</span>
+                      <span>
+                        Cover with plastic and transfer to the refrigerator
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">16.</span>
+                      <span>Cold proof anywhere from 8-48 hours</span>
+                    </li>
+                  </ol>
+                </div>
+
+                {/* Baking */}
+                <div>
+                  <h4 className="mb-2 text-base font-semibold text-teal-400">
+                    Baking
+                  </h4>
+                  <ol className="space-y-2 text-base text-zinc-300" start={17}>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">17.</span>
+                      <span>When ready to bake, set oven to 500°F</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">18.</span>
+                      <span>Place dutch oven in the oven without the lid</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">19.</span>
+                      <span>
+                        Once the oven has preheated, remove loaf from
+                        refrigerator
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">20.</span>
+                      <span>
+                        Flip the loaf onto parchment paper, seam side down
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">21.</span>
+                      <span>
+                        Dust loaf with a fine layer of flour (preferably rice
+                        flour)
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">22.</span>
+                      <span>Score the loaf at a 30 degree angle</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">23.</span>
+                      <span>Transfer loaf to dutch oven and top with lid</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">24.</span>
+                      <span>Bake for 20 minutes</span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">25.</span>
+                      <span>
+                        After 20 minutes, lower the oven to 450°F and remove the
+                        lid
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <span className="text-zinc-500">26.</span>
+                      <span>
+                        Bake for another 30-40 minutes, or until desired color
+                        is achieved
+                      </span>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
-
