@@ -21,7 +21,7 @@ interface SourdoughRatios {
 }
 
 const DEFAULT_RATIOS: SourdoughRatios = {
-  hydration: 70, // 70% hydration
+  hydration: 75, // 75% hydration
   starterRatio: 20, // 20% starter
   saltRatio: 2, // 2% salt
 };
@@ -47,7 +47,6 @@ export default function SourdoughCalculator() {
     starter: 100,
     salt: 10,
   });
-  const [showRecipe, setShowRecipe] = useState(false);
 
   const getTotalFlour = () => {
     return ingredients.flours.reduce((sum, flour) => sum + flour.amount, 0);
@@ -178,28 +177,57 @@ export default function SourdoughCalculator() {
       <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-2xl font-semibold">Ingredient Calculator</h2>
-          <button
-            onClick={addFlourType}
-            className="rounded-lg bg-teal-600 px-3 py-2 text-sm font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
-          >
-            + Add Flour
-          </button>
+        </div>
+
+        {/* Loaf Size Guide */}
+        <div className="mb-6 rounded-lg border border-zinc-700 bg-zinc-900/50 p-4">
+          <h3 className="mb-2 text-sm font-semibold text-zinc-200">
+            Loaf Size Guide
+          </h3>
+          <div className="space-y-1 text-sm text-zinc-400">
+            <div className="flex justify-between">
+              <span>Small loaf (300g flour):</span>
+              <span className="text-zinc-300">
+                ~550g total dough, 8-9" diameter
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Medium loaf (500g flour):</span>
+              <span className="text-zinc-300">
+                ~900g total dough, 12" diameter
+              </span>
+            </div>
+            <div className="flex justify-between">
+              <span>Large loaf (750g flour):</span>
+              <span className="text-zinc-300">
+                ~1,350g total dough, 14-15" diameter
+              </span>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-6">
           {/* Flour Types Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-medium text-zinc-200">Flour Types</h3>
+            <div className="mb-2 flex items-center justify-between">
+              <h3 className="text-lg font-medium text-zinc-200">Flour Types</h3>
+              <button
+                onClick={addFlourType}
+                className="rounded-lg bg-teal-600 px-3 py-2 text-sm font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+              >
+                + Add Flour
+              </button>
+            </div>
             {ingredients.flours.map((flour, index) => (
               <div key={flour.id} className="grid gap-4 sm:grid-cols-3">
-                <div className="space-y-2">
+                <div className="flex flex-col space-y-2">
                   <label className="block text-sm font-medium text-zinc-300">
                     Flour Type
                   </label>
                   <select
                     value={flour.name}
                     onChange={(e) => updateFlourType(flour.id, e.target.value)}
-                    className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+                    className="grow w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
                   >
                     {FLOUR_TYPES.map((type) => (
                       <option key={type} value={type}>
@@ -326,388 +354,318 @@ export default function SourdoughCalculator() {
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Summary Card */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-semibold">Recipe Summary</h2>
+          {/* Quick Presets */}
+          <div className="border-t border-zinc-800 pt-6">
+            <h3 className="mb-3 text-sm font-medium text-zinc-300">
+              Quick Presets
+            </h3>
+            <div className="grid gap-2 sm:grid-cols-3">
+              <button
+                onClick={() =>
+                  setRatios({ hydration: 65, starterRatio: 15, saltRatio: 2 })
+                }
+                className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-left transition-colors hover:border-teal-400 hover:bg-zinc-800"
+              >
+                <div className="text-sm font-medium text-white">
+                  Country Loaf
+                </div>
+                <div className="text-xs text-zinc-400">
+                  65% hydration, 15% starter
+                </div>
+              </button>
 
-        <div className="space-y-3">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-2">
-            <span className="text-zinc-300">Total dough weight:</span>
-            <span className="font-semibold text-teal-200">{totalWeight}g</span>
-          </div>
+              <button
+                onClick={() =>
+                  setRatios({ hydration: 75, starterRatio: 20, saltRatio: 2.2 })
+                }
+                className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-left transition-colors hover:border-teal-400 hover:bg-zinc-800"
+              >
+                <div className="text-sm font-medium text-white">
+                  High Hydration
+                </div>
+                <div className="text-xs text-zinc-400">
+                  75% hydration, 20% starter
+                </div>
+              </button>
 
-          <div className="grid gap-3 sm:grid-cols-2">
-            <div className="space-y-2">
-              <h3 className="font-medium text-zinc-200">Ratios</h3>
-              <div className="space-y-1 text-sm text-zinc-300">
-                <div className="flex justify-between">
-                  <span>Hydration:</span>
-                  <span>{ratios.hydration.toFixed(1)}%</span>
+              <button
+                onClick={() =>
+                  setRatios({ hydration: 80, starterRatio: 25, saltRatio: 2.5 })
+                }
+                className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-left transition-colors hover:border-teal-400 hover:bg-zinc-800"
+              >
+                <div className="text-sm font-medium text-white">
+                  Ciabatta Style
                 </div>
-                <div className="flex justify-between">
-                  <span>Starter:</span>
-                  <span>{ratios.starterRatio.toFixed(1)}%</span>
+                <div className="text-xs text-zinc-400">
+                  80% hydration, 25% starter
                 </div>
-                <div className="flex justify-between">
-                  <span>Salt:</span>
-                  <span>{ratios.saltRatio.toFixed(1)}%</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <h3 className="font-medium text-zinc-200">Amounts</h3>
-              <div className="space-y-1 text-sm text-zinc-300">
-                {ingredients.flours.map((flour) => (
-                  <div key={flour.id} className="flex justify-between">
-                    <span>{flour.name}:</span>
-                    <span>{flour.amount}g</span>
-                  </div>
-                ))}
-                <div className="flex justify-between border-t border-zinc-700 pt-1 font-medium">
-                  <span>Total Flour:</span>
-                  <span>{getTotalFlour()}g</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Water:</span>
-                  <span>{ingredients.water}g</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Starter:</span>
-                  <span>{ingredients.starter}g</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Salt:</span>
-                  <span>{ingredients.salt}g</span>
-                </div>
-              </div>
+              </button>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Quick Presets */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-semibold">Quick Presets</h2>
-        <div className="grid gap-3 sm:grid-cols-3">
-          <button
-            onClick={() =>
-              setRatios({ hydration: 65, starterRatio: 15, saltRatio: 2 })
-            }
-            className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-left transition-colors hover:border-teal-400 hover:bg-zinc-800"
-          >
-            <div className="font-medium text-white">Country Loaf</div>
-            <div className="text-sm text-zinc-400">
-              65% hydration, 15% starter
-            </div>
-          </button>
-
-          <button
-            onClick={() =>
-              setRatios({ hydration: 75, starterRatio: 20, saltRatio: 2.2 })
-            }
-            className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-left transition-colors hover:border-teal-400 hover:bg-zinc-800"
-          >
-            <div className="font-medium text-white">High Hydration</div>
-            <div className="text-sm text-zinc-400">
-              75% hydration, 20% starter
-            </div>
-          </button>
-
-          <button
-            onClick={() =>
-              setRatios({ hydration: 80, starterRatio: 25, saltRatio: 2.5 })
-            }
-            className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-left transition-colors hover:border-teal-400 hover:bg-zinc-800"
-          >
-            <div className="font-medium text-white">Ciabatta Style</div>
-            <div className="text-sm text-zinc-400">
-              80% hydration, 25% starter
-            </div>
-          </button>
         </div>
       </div>
 
       {/* Recipe Instructions */}
       <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
-        <button
-          onClick={() => setShowRecipe(!showRecipe)}
-          className="flex w-full items-center justify-between text-left"
-        >
-          <h2 className="text-xl font-semibold">Instructions</h2>
-          <motion.svg
-            animate={{ rotate: showRecipe ? 180 : 0 }}
-            transition={{ duration: 0.2 }}
-            className="h-6 w-6 text-zinc-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 9l-7 7-7-7"
-            />
-          </motion.svg>
-        </button>
+        <h2 className="mb-4 text-xl font-semibold">Recipe Summary</h2>
 
-        <motion.div
-          initial={false}
-          animate={{
-            height: showRecipe ? "auto" : 0,
-            opacity: showRecipe ? 1 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden"
-        >
-          <div className="mt-6 space-y-6">
-            {/* Ingredients */}
-            <div>
-              <h3 className="mb-3 text-lg font-medium text-zinc-200">
-                Ingredients
-              </h3>
-              <div className="space-y-2 text-base text-zinc-300">
-                {ingredients.flours.map((flour) => (
-                  <div key={flour.id} className="flex justify-between">
-                    <span>{flour.name}</span>
-                    <span className="font-medium text-teal-200">
-                      {flour.amount}g
-                    </span>
-                  </div>
-                ))}
-                <div className="flex justify-between border-t border-zinc-800 pt-2">
-                  <span>Water (lukewarm)</span>
+        <div className="mb-6 grid gap-6 sm:grid-cols-2">
+          <div className="space-y-2">
+            <h3 className="font-medium text-zinc-200">Ingredients</h3>
+            <div className="space-y-2 text-base text-zinc-300">
+              {ingredients.flours.map((flour) => (
+                <div key={flour.id} className="flex justify-between">
+                  <span>{flour.name}</span>
                   <span className="font-medium text-teal-200">
-                    {ingredients.water}g
+                    {flour.amount}g
                   </span>
                 </div>
-                <div className="flex justify-between">
-                  <span>Active starter</span>
-                  <span className="font-medium text-teal-200">
-                    {ingredients.starter}g
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Salt</span>
-                  <span className="font-medium text-teal-200">
-                    {ingredients.salt}g
-                  </span>
-                </div>
+              ))}
+              <div className="flex justify-between border-t border-zinc-700 pt-2">
+                <span>Total Flour</span>
+                <span className="font-medium text-teal-200">
+                  {getTotalFlour()}g
+                </span>
               </div>
-            </div>
-
-            {/* Instructions */}
-            <div>
-              <h3 className="mb-3 text-lg font-medium text-zinc-200">
-                Instructions
-              </h3>
-              <div className="space-y-4">
-                {/* Mixing */}
-                <div>
-                  <h4 className="mb-2 text-base font-semibold text-teal-400">
-                    Mixing & Autolyse
-                  </h4>
-                  <ol className="space-y-2 text-base text-zinc-300">
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">1.</span>
-                      <span>Combine all flours and blend thoroughly</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">2.</span>
-                      <span>
-                        Add lukewarm water and combine with bench scraper
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">3.</span>
-                      <span>Autolyse for 1 hour</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">4.</span>
-                      <span>
-                        Add starter and combine using lobster claw pinching
-                        method
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">5.</span>
-                      <span>
-                        Add salt and pour a splash of warm water over it.
-                        Combine thoroughly
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">6.</span>
-                      <span>
-                        Cover with a damp towel and let sit for 10 minutes
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">7.</span>
-                      <span>
-                        Mix by folding for 10 minutes or until you can form a
-                        gluten window
-                      </span>
-                    </li>
-                  </ol>
-                </div>
-
-                {/* Bulk Ferment */}
-                <div>
-                  <h4 className="mb-2 text-base font-semibold text-teal-400">
-                    Bulk Fermentation
-                  </h4>
-                  <ol className="space-y-2 text-base text-zinc-300" start={8}>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">8.</span>
-                      <span>
-                        Begin bulk ferment: cover with damp towel and let sit
-                        for 1 hour
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">9.</span>
-                      <span>
-                        Fold gently every hour. Continue for 4-7 hours total or
-                        until dough doubles in size and appears whipped
-                      </span>
-                    </li>
-                  </ol>
-                </div>
-
-                {/* Shaping */}
-                <div>
-                  <h4 className="mb-2 text-base font-semibold text-teal-400">
-                    Pre-Shaping & Shaping
-                  </h4>
-                  <ol className="space-y-2 text-base text-zinc-300" start={10}>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">10.</span>
-                      <span>
-                        Dust surface with flour and allow the dough to pour
-                        itself out from the bowl
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">11.</span>
-                      <span>
-                        Cover the loaf with a damp towel and rest for 10 minutes
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">12.</span>
-                      <span>
-                        Flip the loaf over and gently tug outwards, being sure
-                        to retain bubbles
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">13.</span>
-                      <span>
-                        Gently fold the sides in, pinching at the seam if
-                        necessary. Then roll up like a jelly roll (or
-                        overstuffed burrito)
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">14.</span>
-                      <span>
-                        Transfer to proofing basket, seam side up, using bench
-                        scraper
-                      </span>
-                    </li>
-                  </ol>
-                </div>
-
-                {/* Proofing */}
-                <div>
-                  <h4 className="mb-2 text-base font-semibold text-teal-400">
-                    Cold Proof
-                  </h4>
-                  <ol className="space-y-2 text-base text-zinc-300" start={15}>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">15.</span>
-                      <span>
-                        Cover with plastic and transfer to the refrigerator
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">16.</span>
-                      <span>Cold proof anywhere from 8-48 hours</span>
-                    </li>
-                  </ol>
-                </div>
-
-                {/* Baking */}
-                <div>
-                  <h4 className="mb-2 text-base font-semibold text-teal-400">
-                    Baking
-                  </h4>
-                  <ol className="space-y-2 text-base text-zinc-300" start={17}>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">17.</span>
-                      <span>When ready to bake, set oven to 500°F</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">18.</span>
-                      <span>Place dutch oven in the oven without the lid</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">19.</span>
-                      <span>
-                        Once the oven has preheated, remove loaf from
-                        refrigerator
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">20.</span>
-                      <span>
-                        Flip the loaf onto parchment paper, seam side down
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">21.</span>
-                      <span>
-                        Dust loaf with a fine layer of flour (preferably rice
-                        flour)
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">22.</span>
-                      <span>Score the loaf at a 30 degree angle</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">23.</span>
-                      <span>Transfer loaf to dutch oven and top with lid</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">24.</span>
-                      <span>Bake for 20 minutes</span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">25.</span>
-                      <span>
-                        After 20 minutes, lower the oven to 450°F and remove the
-                        lid
-                      </span>
-                    </li>
-                    <li className="flex gap-3">
-                      <span className="text-zinc-500">26.</span>
-                      <span>
-                        Bake for another 30-40 minutes, or until desired color
-                        is achieved
-                      </span>
-                    </li>
-                  </ol>
-                </div>
+              <div className="flex justify-between">
+                <span>Water (lukewarm)</span>
+                <span className="font-medium text-teal-200">
+                  {ingredients.water}g
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Active starter</span>
+                <span className="font-medium text-teal-200">
+                  {ingredients.starter}g
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Salt</span>
+                <span className="font-medium text-teal-200">
+                  {ingredients.salt}g
+                </span>
+              </div>
+              <div className="flex justify-between border-t border-zinc-700 pt-2 font-semibold">
+                <span>Total dough weight</span>
+                <span className="text-teal-200">{totalWeight}g</span>
               </div>
             </div>
           </div>
-        </motion.div>
+
+          <div className="space-y-2">
+            <h3 className="font-medium text-zinc-200">Ratios</h3>
+            <div className="space-y-2 text-base text-zinc-300">
+              <div className="flex justify-between">
+                <span>Hydration</span>
+                <span className="font-medium text-teal-200">
+                  {ratios.hydration.toFixed(1)}%
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Starter</span>
+                <span className="font-medium text-teal-200">
+                  {ratios.starterRatio.toFixed(1)}%
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span>Salt</span>
+                <span className="font-medium text-teal-200">
+                  {ratios.saltRatio.toFixed(1)}%
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h2 className="mb-4 text-xl font-semibold">Instructions</h2>
+        <div className="space-y-4">
+          {/* Mixing */}
+          <div>
+            <h4 className="mb-2 text-base font-semibold text-teal-400">
+              Mixing & Autolyse
+            </h4>
+            <ol className="space-y-2 text-base text-zinc-300">
+              <li className="flex gap-3">
+                <span className="text-zinc-500">1.</span>
+                <span>Combine all flours and blend thoroughly</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">2.</span>
+                <span>Add lukewarm water and combine with bench scraper</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">3.</span>
+                <span>Autolyse for 1 hour</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">4.</span>
+                <span>
+                  Add starter and combine using lobster claw pinching method
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">5.</span>
+                <span>
+                  Add salt and pour a splash of warm water over it. Combine
+                  thoroughly
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">6.</span>
+                <span>Cover with a damp towel and let sit for 10 minutes</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">7.</span>
+                <span>
+                  Mix by folding for 10 minutes or until you can form a gluten
+                  window
+                </span>
+              </li>
+            </ol>
+          </div>
+
+          {/* Bulk Ferment */}
+          <div>
+            <h4 className="mb-2 text-base font-semibold text-teal-400">
+              Bulk Fermentation
+            </h4>
+            <ol className="space-y-2 text-base text-zinc-300" start={8}>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">8.</span>
+                <span>
+                  Begin bulk ferment: cover with damp towel and let sit for 1
+                  hour
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">9.</span>
+                <span>
+                  Fold gently every hour. Continue for 4-7 hours total or until
+                  dough doubles in size and appears whipped
+                </span>
+              </li>
+            </ol>
+          </div>
+
+          {/* Shaping */}
+          <div>
+            <h4 className="mb-2 text-base font-semibold text-teal-400">
+              Pre-Shaping & Shaping
+            </h4>
+            <ol className="space-y-2 text-base text-zinc-300" start={10}>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">10.</span>
+                <span>
+                  Dust surface with flour and allow the dough to pour itself out
+                  from the bowl
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">11.</span>
+                <span>
+                  Cover the loaf with a damp towel and rest for 10 minutes
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">12.</span>
+                <span>
+                  Flip the loaf over and gently tug outwards, being sure to
+                  retain bubbles
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">13.</span>
+                <span>
+                  Gently fold the sides in, pinching at the seam if necessary.
+                  Then roll up like a jelly roll (or overstuffed burrito)
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">14.</span>
+                <span>
+                  Transfer to proofing basket, seam side up, using bench scraper
+                </span>
+              </li>
+            </ol>
+          </div>
+
+          {/* Proofing */}
+          <div>
+            <h4 className="mb-2 text-base font-semibold text-teal-400">
+              Cold Proof
+            </h4>
+            <ol className="space-y-2 text-base text-zinc-300" start={15}>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">15.</span>
+                <span>Cover with plastic and transfer to the refrigerator</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">16.</span>
+                <span>Cold proof anywhere from 8-48 hours</span>
+              </li>
+            </ol>
+          </div>
+
+          {/* Baking */}
+          <div>
+            <h4 className="mb-2 text-base font-semibold text-teal-400">
+              Baking
+            </h4>
+            <ol className="space-y-2 text-base text-zinc-300" start={17}>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">17.</span>
+                <span>When ready to bake, set oven to 500°F</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">18.</span>
+                <span>Place dutch oven in the oven without the lid</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">19.</span>
+                <span>
+                  Once the oven has preheated, remove loaf from refrigerator
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">20.</span>
+                <span>Flip the loaf onto parchment paper, seam side down</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">21.</span>
+                <span>
+                  Dust loaf with a fine layer of flour (preferably rice flour)
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">22.</span>
+                <span>Score the loaf at a 30 degree angle</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">23.</span>
+                <span>Transfer loaf to dutch oven and top with lid</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">24.</span>
+                <span>Bake for 20 minutes</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">25.</span>
+                <span>
+                  After 20 minutes, lower the oven to 450°F and remove the lid
+                </span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-zinc-500">26.</span>
+                <span>
+                  Bake for another 30-40 minutes, or until desired color is
+                  achieved
+                </span>
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
     </motion.div>
   );
