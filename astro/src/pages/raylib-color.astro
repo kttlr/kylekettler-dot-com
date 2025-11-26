@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Main from "../components/Main.astro";
+import RaylibColorConverter from "../components/React/RaylibColorConverter";
+---
+
+<Layout title="Raylib Color Converter | Kyle Kettler">
+  <Main>
+    <div class="flex animate-fade-in flex-col gap-8">
+      <RaylibColorConverter client:load />
+    </div>
+  </Main>
+</Layout>
