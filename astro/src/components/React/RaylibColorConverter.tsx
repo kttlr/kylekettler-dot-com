@@ -63,12 +63,10 @@ export default function RaylibColorConverter() {
     let updatedPalettes: SavedPalette[];
 
     if (currentPaletteId) {
-      // Update existing palette
       updatedPalettes = savedPalettes.map((p) =>
         p.id === currentPaletteId ? { ...p, name, colors: palette } : p,
       );
     } else {
-      // Create new palette
       const newPalette: SavedPalette = {
         id: Date.now().toString(),
         name,
@@ -166,7 +164,6 @@ export default function RaylibColorConverter() {
 
     if (!variableName) return colorValue;
 
-    // Replace spaces with underscores for valid variable names
     const safeName = variableName.replace(/\s+/g, "_");
 
     switch (language) {
@@ -241,18 +238,30 @@ export default function RaylibColorConverter() {
   const updatePaletteColor = () => {
     if (!selectedColorId || !rgb) return;
 
-    setPalette(
-      palette.map((color) =>
-        color.id === selectedColorId
-          ? {
-              ...color,
-              hex: hexInput.startsWith("#") ? hexInput : `#${hexInput}`,
-              opacity: opacity,
-              name: variableName || color.name,
-            }
-          : color,
-      ),
+    const updatedPalette = palette.map((color) =>
+      color.id === selectedColorId
+        ? {
+            ...color,
+            hex: hexInput.startsWith("#") ? hexInput : `#${hexInput}`,
+            opacity: opacity,
+            name: variableName || color.name,
+          }
+        : color,
     );
+
+    setPalette(updatedPalette);
+
+    // Update localStorage if this palette is saved
+    if (currentPaletteId) {
+      const updatedPalettes = savedPalettes.map((p) =>
+        p.id === currentPaletteId ? { ...p, colors: updatedPalette } : p,
+      );
+      setSavedPalettes(updatedPalettes);
+      localStorage.setItem(
+        PALETTES_STORAGE_KEY,
+        JSON.stringify(updatedPalettes),
+      );
+    }
   };
 
   const removeFromPalette = (id: string) => {
@@ -266,7 +275,6 @@ export default function RaylibColorConverter() {
     const rgb = hexToRgb(color.hex);
     if (!rgb) return "";
 
-    // Replace spaces with underscores for valid variable names
     const safeName = color.name.replace(/\s+/g, "_");
 
     const colorValue = (() => {
