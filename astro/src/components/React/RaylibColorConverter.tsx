@@ -339,266 +339,263 @@ export default function RaylibColorConverter() {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid grid-cols-1 gap-6 items-start pt-24 p-12 md:grid-cols-2"
+      className="grid grid-cols-1 gap-6 items-start md:grid-cols-2"
     >
       {/* Left Column - Color Selector and Palette */}
-      <div className="space-y-6">
+      <div className="space-y-6 rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
         {/* Color Selector */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
-          <div className="mb-6">
-            <h2 className="text-2xl font-semibold">Color Selector</h2>
-            <p className="mt-2 text-sm text-zinc-400">
-              Configure your hex color and opacity settings
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold">Colors</h2>
+          <p className="mt-2 text-sm text-zinc-400">
+            Configure your hex color and opacity settings
+          </p>
+        </div>
+
+        <div className="space-y-6">
+          {/* Hex Input */}
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-zinc-300">
+              Hex Color Code
+            </label>
+            <input
+              type="text"
+              value={hexInput}
+              onChange={handleHexChange}
+              placeholder="#7817ff"
+              className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 font-mono text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+            />
+            <p className="text-xs text-zinc-400">
+              Enter a 6-digit hex color code (with or without #)
             </p>
           </div>
 
-          <div className="space-y-6">
-            {/* Hex Input */}
+          {/* Variable Name Input */}
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-zinc-300">
+              Constant Name
+            </label>
+            <input
+              type="text"
+              value={variableName}
+              onChange={handleVariableNameChange}
+              placeholder="Constant name"
+              className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 font-mono text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+            />
+            <p className="text-xs text-zinc-400">
+              Enter a name to generate a constant declaration (required for
+              palette code).
+            </p>
+          </div>
+
+          {/* Opacity Slider */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <label className="block text-sm font-medium text-zinc-300">
+                Opacity
+              </label>
+              <span className="text-sm font-semibold text-teal-200">
+                {opacity}
+              </span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="255"
+              value={opacity}
+              onChange={handleOpacityChange}
+              className="w-full"
+            />
+          </div>
+
+          {/* Color Preview with RGBA Values */}
+          {rgb && (
             <div className="space-y-2">
               <label className="block text-sm font-medium text-zinc-300">
-                Hex Color Code
+                Color Preview
               </label>
-              <input
-                type="text"
-                value={hexInput}
-                onChange={handleHexChange}
-                placeholder="#7817ff"
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 font-mono text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
-              />
-              <p className="text-xs text-zinc-400">
-                Enter a 6-digit hex color code (with or without #)
-              </p>
-            </div>
-
-            {/* Variable Name Input */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-zinc-300">
-                Constant Name
-              </label>
-              <input
-                type="text"
-                value={variableName}
-                onChange={handleVariableNameChange}
-                placeholder="Constant name"
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 font-mono text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
-              />
-              <p className="text-xs text-zinc-400">
-                Enter a name to generate a constant declaration
-              </p>
-            </div>
-
-            {/* Opacity Slider */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between">
-                <label className="block text-sm font-medium text-zinc-300">
-                  Opacity
-                </label>
-                <span className="text-sm font-semibold text-teal-200">
-                  {opacity}
-                </span>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="255"
-                value={opacity}
-                onChange={handleOpacityChange}
-                className="w-full"
-              />
-            </div>
-
-            {/* Color Preview with RGBA Values */}
-            {rgb && (
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-zinc-300">
-                  Color Preview
-                </label>
-                <div
-                  className="relative flex items-center justify-center rounded-lg border border-zinc-700 px-6 py-10"
-                  style={{
-                    backgroundColor: `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity / 255})`,
-                  }}
-                >
-                  <div className="flex items-center rounded-lg bg-black/30 px-4 py-2 backdrop-blur-sm">
-                    <div className="flex items-center gap-4 text-center">
-                      <div>
-                        <div className="text-xs mb-1 text-white/80">Red</div>
-                        <div className="text-lg font-semibold text-white">
-                          {rgb.r}
-                        </div>
+              <div
+                className="relative flex items-center justify-center rounded-lg border border-zinc-700 px-6 py-10"
+                style={{
+                  backgroundColor: `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity / 255})`,
+                }}
+              >
+                <div className="flex items-center rounded-lg bg-black/30 px-4 py-2 backdrop-blur-sm">
+                  <div className="flex items-center gap-4 text-center">
+                    <div>
+                      <div className="text-xs mb-1 text-white/80">Red</div>
+                      <div className="text-lg font-semibold text-white">
+                        {rgb.r}
                       </div>
-                      <div>
-                        <div className="text-xs mb-1 text-white/80">Green</div>
-                        <div className="text-lg font-semibold text-white">
-                          {rgb.g}
-                        </div>
+                    </div>
+                    <div>
+                      <div className="text-xs mb-1 text-white/80">Green</div>
+                      <div className="text-lg font-semibold text-white">
+                        {rgb.g}
                       </div>
-                      <div>
-                        <div className="text-xs mb-1 text-white/80">Blue</div>
-                        <div className="text-lg font-semibold text-white">
-                          {rgb.b}
-                        </div>
+                    </div>
+                    <div>
+                      <div className="text-xs mb-1 text-white/80">Blue</div>
+                      <div className="text-lg font-semibold text-white">
+                        {rgb.b}
                       </div>
-                      <div>
-                        <div className="text-xs mb-1 text-white/80">Alpha</div>
-                        <div className="text-lg font-semibold text-white">
-                          {opacity}
-                        </div>
+                    </div>
+                    <div>
+                      <div className="text-xs mb-1 text-white/80">Alpha</div>
+                      <div className="text-lg font-semibold text-white">
+                        {opacity}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            )}
-
-            {/* Palette Actions */}
-            {rgb && (
-              <div className="flex gap-3">
-                {selectedColorId ? (
-                  <>
-                    <button
-                      onClick={updatePaletteColor}
-                      className="flex-1 rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
-                    >
-                      Update in Palette
-                    </button>
-                    <button
-                      onClick={() => {
-                        setSelectedColorId(null);
-                        setHexInput("#7817ff");
-                        setOpacity(255);
-                        setVariableName("");
-                      }}
-                      className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-400/20"
-                    >
-                      New Color
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    onClick={addToPalette}
-                    className="flex-1 rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
-                  >
-                    Add to Palette
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Color Palette */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
-          <div className="mb-4">
-            <h2 className="text-xl font-semibold">Color Palette</h2>
-            <p className="mt-1 text-sm text-zinc-400">
-              {palette.length === 0
-                ? "Your saved colors will appear here. Create a color and add it to your palette."
-                : "Click a color to edit it, or remove colors you no longer need."}
-            </p>
-          </div>
-
-          {/* Palette Name Input */}
-          <div className="mb-4 space-y-2">
-            <label className="block text-sm font-medium text-zinc-300">
-              Palette Name
-            </label>
-            <input
-              type="text"
-              value={paletteName}
-              onChange={(e) => setPaletteName(e.target.value)}
-              placeholder="My Palette"
-              className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2 text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
-            />
-          </div>
-
-          {palette.length === 0 ? (
-            <div className="rounded-lg border border-zinc-700 border-dashed bg-zinc-900/50 p-8 text-center">
-              <p className="text-sm text-zinc-500">No colors in palette yet</p>
             </div>
-          ) : (
-            <div className="space-y-4">
-              {/* Color Grid */}
-              <div className="grid gap-3 sm:grid-cols-2">
-                {palette.map((color) => {
-                  const rgb = hexToRgb(color.hex);
-                  const isSelected = selectedColorId === color.id;
-                  return (
-                    <div
-                      key={color.id}
-                      className={`flex items-center gap-3 rounded-lg border p-3 transition-colors ${
-                        isSelected
-                          ? "border-teal-400 bg-zinc-800"
-                          : "border-zinc-700 bg-zinc-900"
-                      }`}
-                    >
-                      <button
-                        onClick={() => loadFromPalette(color)}
-                        className="flex flex-1 items-center gap-3 text-left"
-                      >
-                        <div
-                          className="h-10 w-10 flex-shrink-0 rounded border border-zinc-700"
-                          style={{
-                            backgroundColor: `rgba(${rgb?.r}, ${rgb?.g}, ${rgb?.b}, ${color.opacity / 255})`,
-                          }}
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="text-sm font-medium text-white truncate">
-                            {color.name}
-                          </div>
-                          <div className="font-mono text-xs text-zinc-400">
-                            {color.hex} · α{color.opacity}
-                          </div>
-                        </div>
-                      </button>
-                      <button
-                        onClick={() => removeFromPalette(color.id)}
-                        className="flex-shrink-0 rounded p-1.5 text-zinc-400 transition-colors hover:bg-red-600/10 hover:text-red-400"
-                        title="Remove color"
-                      >
-                        <svg
-                          className="h-4 w-4"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  );
-                })}
-              </div>
+          )}
 
-              {/* Save/New Palette Buttons */}
-              <div className="flex gap-3">
+          {/* Palette Actions */}
+          {rgb && (
+            <div className="flex gap-3">
+              {selectedColorId ? (
+                <>
+                  <button
+                    onClick={updatePaletteColor}
+                    className="flex-1 rounded bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+                  >
+                    Update in Palette
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedColorId(null);
+                      setHexInput("#7817ff");
+                      setOpacity(255);
+                      setVariableName("");
+                    }}
+                    className="rounded border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-400/20"
+                  >
+                    New Color
+                  </button>
+                </>
+              ) : (
                 <button
-                  onClick={savePalette}
-                  className="flex-1 rounded-lg bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+                  onClick={addToPalette}
+                  className="flex-1 rounded bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
                 >
-                  {paletteSaved
-                    ? "Saved!"
-                    : currentPaletteId
-                      ? "Update Palette"
-                      : "Save Palette"}
+                  Add to Palette
                 </button>
-                <button
-                  onClick={newPalette}
-                  className="rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-400/20"
-                >
-                  New Palette
-                </button>
-              </div>
+              )}
             </div>
           )}
         </div>
 
+        {/* Color Palette */}
+        <div className="mb-4">
+          <h2 className="text-xl font-semibold">Palette</h2>
+          <p className="mt-1 text-sm text-zinc-400">
+            {palette.length === 0
+              ? "Your saved colors will appear here. Create a color and add it to your palette."
+              : "Click a color to edit it, or remove colors you no longer need."}
+          </p>
+        </div>
+
+        {/* Palette Name Input */}
+        <div className="mb-4 space-y-2">
+          <label className="block text-sm font-medium text-zinc-300">
+            Palette Name
+          </label>
+          <input
+            type="text"
+            value={paletteName}
+            onChange={(e) => setPaletteName(e.target.value)}
+            placeholder="My Palette"
+            className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-2 text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+          />
+        </div>
+
+        {palette.length === 0 ? (
+          <div className="rounded-lg border border-zinc-700 border-dashed bg-zinc-900/50 p-8 text-center">
+            <p className="text-sm text-zinc-500">No colors in palette yet</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {/* Color Grid */}
+            <div className="grid gap-3 sm:grid-cols-2">
+              {palette.map((color) => {
+                const rgb = hexToRgb(color.hex);
+                const isSelected = selectedColorId === color.id;
+                return (
+                  <div
+                    key={color.id}
+                    className={`flex items-center gap-3 rounded-lg border p-3 transition-colors ${
+                      isSelected
+                        ? "border-teal-400 bg-zinc-800"
+                        : "border-zinc-700 bg-zinc-900"
+                    }`}
+                  >
+                    <button
+                      onClick={() => loadFromPalette(color)}
+                      className="flex flex-1 items-center gap-3 text-left"
+                    >
+                      <div
+                        className="h-10 w-10 flex-shrink-0 rounded border border-zinc-700"
+                        style={{
+                          backgroundColor: `rgba(${rgb?.r}, ${rgb?.g}, ${rgb?.b}, ${color.opacity / 255})`,
+                        }}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="text-sm font-medium text-white truncate">
+                          {color.name}
+                        </div>
+                        <div className="font-mono text-xs text-zinc-400">
+                          {color.hex} · α{color.opacity}
+                        </div>
+                      </div>
+                    </button>
+                    <button
+                      onClick={() => removeFromPalette(color.id)}
+                      className="flex-shrink-0 rounded p-1.5 text-zinc-400 transition-colors hover:bg-red-600/10 hover:text-red-400"
+                      title="Remove color"
+                    >
+                      <svg
+                        className="h-4 w-4"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path d="M6 18L18 6M6 6l12 12"></path>
+                      </svg>
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Save/New Palette Buttons */}
+            <div className="flex gap-3">
+              <button
+                onClick={savePalette}
+                className="flex-1 rounded bg-teal-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+              >
+                {paletteSaved
+                  ? "Saved!"
+                  : currentPaletteId
+                    ? "Update Palette"
+                    : "Save Palette"}
+              </button>
+              <button
+                onClick={newPalette}
+                className="rounded border border-zinc-700 bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-400/20"
+              >
+                New Palette
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Saved Palettes */}
         {savedPalettes.length > 0 && (
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
+          <div>
             <div className="mb-4">
               <h2 className="text-xl font-semibold">Saved Palettes</h2>
               <p className="mt-1 text-sm text-zinc-400">
@@ -673,11 +670,11 @@ export default function RaylibColorConverter() {
       </div>
 
       {/* Right Column - Code Output */}
-      <div className="space-y-6">
+      <div className="space-y-2 rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
         {/* Code Output */}
-        <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
+        <div className="">
           <div className="mb-6">
-            <h2 className="text-2xl font-semibold">Code Output</h2>
+            <h2 className="text-xl font-semibold">Output</h2>
             <p className="mt-2 text-sm text-zinc-400">
               Generate Raylib color code in various languages
             </p>
@@ -692,7 +689,7 @@ export default function RaylibColorConverter() {
               <select
                 value={language}
                 onChange={handleLanguageChange}
-                className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-4 py-3 text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+                className="w-full rounded border border-zinc-700 bg-zinc-900 px-4 py-3 text-white focus:border-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
               >
                 <option value="Odin">Odin</option>
                 <option value="C">C</option>
@@ -720,7 +717,7 @@ export default function RaylibColorConverter() {
                 {rgb && (
                   <button
                     onClick={handleCopy}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-lg bg-teal-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded bg-teal-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
                   >
                     {copied ? "Copied!" : "Copy"}
                   </button>
@@ -736,36 +733,28 @@ export default function RaylibColorConverter() {
         </div>
 
         {/* Palette Code Preview */}
-        {palette.length > 0 && (
-          <div className="rounded-xl border border-zinc-800 bg-zinc-950 p-6 shadow-lg">
-            <div className="mb-4">
-              <h2 className="text-xl font-semibold">Palette Code</h2>
-              <p className="mt-1 text-sm text-zinc-400">
-                Copy all your palette colors as code in {language} format.
-              </p>
+        <div className="pt-4 pb-2">
+          <h2 className="text-xl font-semibold">Palette Code</h2>
+        </div>
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-zinc-300">
+            Generated Code ({language})
+          </label>
+          <div className="relative">
+            <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4 pr-24">
+              <pre className="overflow-x-auto font-mono text-sm text-white">
+                {palette.length === 0 && "No colors in palette yet"}
+                {palette.map((color) => formatPaletteColor(color)).join("\n")}
+              </pre>
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium text-zinc-300">
-                Generated Code ({language})
-              </label>
-              <div className="relative">
-                <div className="rounded-lg border border-zinc-700 bg-zinc-900 p-4 pr-24">
-                  <pre className="overflow-x-auto font-mono text-sm text-white">
-                    {palette
-                      .map((color) => formatPaletteColor(color))
-                      .join("\n")}
-                  </pre>
-                </div>
-                <button
-                  onClick={copyEntirePalette}
-                  className="absolute right-2 top-2 rounded-lg bg-teal-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
-                >
-                  {paletteCopied ? "Copied!" : "Copy"}
-                </button>
-              </div>
-            </div>
+            <button
+              onClick={copyEntirePalette}
+              className="absolute right-2.5 top-2.5 rounded bg-teal-600 px-3 py-1.5 text-sm font-medium text-white transition-all hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400/20"
+            >
+              {paletteCopied ? "Copied!" : "Copy"}
+            </button>
           </div>
-        )}
+        </div>
       </div>
     </motion.div>
   );
