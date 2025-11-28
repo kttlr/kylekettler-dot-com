@@ -13,24 +13,11 @@ import CardLink from "../components/React/Card_Link";
 import Badge from "../components/Badge.astro";
 import Footer from "../components/Footer.astro";
 
-const technologies = [
-  "TypeScript",
-  "JavaScript (ES6+)",
-  "CSS",
-  "React",
-  "TailwindCSS",
-  "Astro",
-  "NextJS",
-  "Node.js",
-  "Express",
-  "PostgreSQL",
-];
-
-const projects = await getCollection("projects", ({ data }) => {
+const projectsData = await getCollection("projects", ({ data }) => {
   return data.featured;
 });
 
-const projectsReversed = projects.reverse();
+const projects = projectsData.sort((a, b) => a.data.order - b.data.order);
 
 const posts = await getCollection("posts");
 ---
@@ -77,7 +64,7 @@ const posts = await getCollection("posts");
       </div>
       <div>
         <div class="mb-4">
-          <H2>Posts</H2>
+          <h2 class="text-lg">Posts</h2>
         </div>
         <div class="space-y-3">
         {
@@ -107,24 +94,17 @@ const posts = await getCollection("posts");
         </div>
       </div>
       <div class="flex flex-col gap-4">
-        <H2>Things I've worked on</H2>
+        <h2 class="text-lg">Experience</h2>
         {
-          projectsReversed.map((p) => (
-            <a href={`/projects/${p.slug}`}>
-              <CardLink client:visible>
-                <div class="mb-4 flex items-center justify-between">
-                  <h2 class="text-2xl font-semibold">{p.data.title}</h2>
-                  <p class="text-xs font-light text-zinc-400">{p.data.date}</p>
-                </div>
-                <p class="mb-6 text-sm">{p.data.description}</p>
-                <h3 class="mb-2">Stack</h3>
-                <div class="flex flex-wrap gap-3 text-sm font-light text-zinc-300">
-                  {p.data.stack.map((tech) => (
-                    <Badge text={tech} />
-                  ))}
-                </div>
-              </CardLink>
-            </a>
+          projects.map((p) => (
+            <div class="mb-1">
+              <div class="mb-1 flex items-center justify-between">
+                <h3 class="font-semibold">{p.data.title}</h3>
+                <p class="text-xs font-light text-zinc-400">{p.data.date}</p>
+              </div>
+              <p class="mb-1 text-sm">{p.data.description}</p>
+              <p class="text-sm">Role: {p.data.role}</p>
+            </div>
           ))
         }
       </div>
