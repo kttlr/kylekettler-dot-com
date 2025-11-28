@@ -17,7 +17,7 @@ const projectsData = await getCollection("projects", ({ data }) => {
   return data.featured;
 });
 
-const projects = projectsData.sort((a, b) => a.data.order - b.data.order);
+const projects = projectsData.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
 const posts = await getCollection("posts");
 ---
@@ -94,7 +94,7 @@ const posts = await getCollection("posts");
         </div>
       </div>
       <div class="flex flex-col gap-4">
-        <h2 class="text-lg">Experience</h2>
+        <h2 class="text-lg">Work Experience</h2>
         {
           projects.map((p) => (
             <div class="mb-1">
