@@ -92,6 +92,11 @@ export default function RaylibColorConverter() {
   };
 
   const deleteSavedPalette = (id: string) => {
+    const paletteToDelete = savedPalettes.find((p) => p.id === id);
+    if (!paletteToDelete) return;
+
+    if (!window.confirm(`Delete "${paletteToDelete.name}"?`)) return;
+
     const updatedPalettes = savedPalettes.filter((p) => p.id !== id);
     setSavedPalettes(updatedPalettes);
     localStorage.setItem(PALETTES_STORAGE_KEY, JSON.stringify(updatedPalettes));
