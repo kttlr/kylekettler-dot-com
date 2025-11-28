@@ -346,9 +346,6 @@ export default function RaylibColorConverter() {
         {/* Color Selector */}
         <div className="mb-6">
           <h2 className="text-xl font-semibold">Colors</h2>
-          <p className="mt-2 text-sm text-zinc-400">
-            Configure your hex color and opacity settings
-          </p>
         </div>
 
         <div className="space-y-6">
@@ -391,7 +388,7 @@ export default function RaylibColorConverter() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label className="block text-sm font-medium text-zinc-300">
-                Opacity
+                Alpha Value
               </label>
               <span className="text-sm font-semibold text-teal-200">
                 {opacity}
@@ -598,9 +595,6 @@ export default function RaylibColorConverter() {
           <div>
             <div className="mb-4">
               <h2 className="text-xl font-semibold">Saved Palettes</h2>
-              <p className="mt-1 text-sm text-zinc-400">
-                Click a palette to load it.
-              </p>
             </div>
             <div className="space-y-2">
               {savedPalettes.map((saved) => (
