@@ -1,0 +1,27 @@
+---
+import "../styles/main.css";
+import RaylibColorConverter from "../components/React/RaylibColorConverter";
+import { ViewTransitions } from "astro:transitions";
+import Meta from "../components/Meta.astro";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <script src="https://beamanalytics.b-cdn.net/beam.min.js" data-token="d6256b06-3735-42eb-85b0-1e13b0016035" async></script>
+    <Meta title={"Raylib Color Palette Tool"} description={"Generate Raylib color code in various languages"} />
+    <ViewTransitions />
+  </head>
+  <body
+    class="bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-300 selection:text-zinc-900"
+  >
+    <div
+      class="min-h-screen bg-gradient-to-tl from-zinc-950 via-zinc-700/10 to-zinc-950/80 pb-4"
+    >
+    <div class="flex animate-fade-in flex-col gap-4 p-12">
+      <h1 class="text-xl">Raylib Color Palette Tool</h1>
+      <RaylibColorConverter client:load />
+    </div>
+    </div>
+  </body>
+</html>
