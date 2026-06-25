@@ -19,7 +19,16 @@ const projectsData = await getCollection("projects", ({ data }) => {
 
 const projects = projectsData.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
-const posts = await getCollection("posts");
+const posts = (await getCollection("posts")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const postDateFormatter = new Intl.DateTimeFormat(undefined, {
+  month: "numeric",
+  day: "numeric",
+  year: "numeric",
+  timeZone: "UTC",
+});
 ---
 
 <Layout title="Kyle Kettler | Software Developer">
@@ -76,17 +85,9 @@ const posts = await getCollection("posts");
               <h3>{post.data.title}</h3>
               <time
                 class="text-xs font-light text-zinc-400"
-                datetime={post.data.date.toLocaleDateString(undefined, {
-                  month: "numeric",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+                datetime={post.data.date.toISOString().slice(0, 10)}
               >
-                {post.data.date.toLocaleDateString(undefined, {
-                  month: "numeric",
-                  day: "numeric",
-                  year: "numeric",
-                })}
+                {postDateFormatter.format(post.data.date)}
               </time>
             </a>
           ))
